@@ -29,10 +29,13 @@ const Register = () => {
       } else {
         setMessage("Erro ao registrar. Tente novamente.");
       }
-    } catch (error) {
+        } catch (error) {
       console.error(error);
-      setMessage("Falha ao registrar. Verifique os dados.");
+      // Nova linha para extrair a mensagem de erro do servidor
+      const errorMessage = error.response?.data?.error || "Falha ao registrar. Verifique os dados.";
+      setMessage(errorMessage);
     }
+
   };
 
   return (
