@@ -1,26 +1,63 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-
-// Importa as rotas
-import authRoutes from './routes/authRoutes.js';
-import homeRoutes from './routes/homeRoutes.js';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const prisma = new PrismaClient();
 
-// Rota principal
-app.get('/', (req, res) => {
-  res.send('Servidor backend funcionando!');
+// Configuração do Better Auth
+const auth = betterAuth({
+  database: prismaAdapter(prisma, {}),
+  secret: process.env.AUTH_SECRET || "uma-senha-super-secreta",
+  emailAndPassword: { enabled: true },
 });
 
-// Usa as rotas
-app.use('/api/auth', authRoutes);
-app.use('/api/home', homeRoutes);
+// Middleware básico
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(express.json());
 
-// Porta do servidor
+// ✅ Integração manual com Express
+app.post("/api/auth/signup", async (req, res) => {
+  try {
+    const result = await auth.api.signup(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.post("/api/auth/signin", async (req, res) => {
+  try {
+    const result = await auth.api.signin(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/api/auth/session", async (req, res) => {
+  try {
+    const result = await auth.api.session(req);
+    res.json(result);
+  } catch (error) {
+    res.status(401).json({ error: "Sessão inválida" });
+  }
+});
+
+// Rota principal
+app.get("/", (_req, res) => res.send("Servidor backend funcionando!"));
+
+// Exemplo de rota protegida
+app.get("/api/profile", async (req, res) => {
+  const session = await auth.api.session(req);
+  if (!session?.user) return res.status(401).json({ error: "Não autorizado" });
+  res.json({ message: "Bem-vindo(a)!", user: session.user });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

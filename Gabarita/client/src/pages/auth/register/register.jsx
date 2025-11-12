@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import "./register.css";
 
 const Register = () => {
@@ -7,12 +8,31 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    // Aqui você chamaria a API do backend
-    console.log({ name, email, password });
-    navigate("/"); // Volta para login após registro
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        { name, email, password },
+        { withCredentials: true } // permite cookies/sessão
+      );
+
+      if (res.data?.user) {
+        setMessage("Cadastro realizado com sucesso!");
+        console.log("Usuário criado:", res.data.user);
+
+        // Redireciona para o login
+        setTimeout(() => navigate("/"), 1000);
+      } else {
+        setMessage("Erro ao registrar. Tente novamente.");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Falha ao registrar. Verifique os dados.");
+    }
   };
 
   return (
@@ -47,8 +67,14 @@ const Register = () => {
           Registrar
         </button>
       </form>
+
+      {message && <p className="register-message">{message}</p>}
+
       <p className="register-text-center register-text-small">
-        Já tem conta? <Link to="/" className="register-link">Login</Link>
+        Já tem conta?{" "}
+        <Link to="/" className="register-link">
+          Login
+        </Link>
       </p>
     </div>
   );
