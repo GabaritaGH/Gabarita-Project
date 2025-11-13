@@ -1,20 +1,25 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
-import { StackServerApp } from "@stackframe/js";
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const { PrismaClient } = require("@prisma/client");
 
 dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
 
-// Configuração do StackServerApp (Neon Auth)
-const stackServerApp = new StackServerApp({
-  projectId: process.env.STACK_PROJECT_ID,
-  publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
-  secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
-});
+async function initializeServer() {
+  // Importação dinâmica para obter o StackServerApp
+  const stackframe = await import("@stackframe/js");
+  const { StackServerApp } = stackframe;
+
+  // Configuração do StackServerApp (Neon Auth)
+  const stackServerApp = new StackServerApp({
+    projectId: process.env.STACK_PROJECT_ID,
+    publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
+    secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
+  });
+
 
 // Middleware básico
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -35,4 +40,4 @@ app.get("/api/profile", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))};
