@@ -20,12 +20,15 @@ const Register = () => {
         { withCredentials: true } // permite cookies/sessão
       );
 
-      if (res.data?.user) {
+      if (res.data?.token) {
+        // 1. Salvar o token JWT no localStorage
+        localStorage.setItem('authToken', res.data.token);
+        
         setMessage("Cadastro realizado com sucesso!");
         console.log("Usuário criado:", res.data.user);
 
-        // Redireciona para o login
-        setTimeout(() => navigate("/"), 1000);
+        // Redireciona para a Home
+        setTimeout(() => navigate("/home"), 1000); // Redireciona para /home
       } else {
         setMessage("Erro ao registrar. Tente novamente.");
       }

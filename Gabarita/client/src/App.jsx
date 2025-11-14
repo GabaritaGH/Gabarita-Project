@@ -6,9 +6,10 @@ import Home from "./pages/home/home.jsx";
 
 // Componente de proteção de rota
 const ProtectedRoute = ({ element }) => {
-  const isAuthenticated = document.cookie.includes("auth_session");
+  const isAuthenticated = localStorage.getItem("authToken"); // <--- CORREÇÃO: Verifica o localStorage
   return isAuthenticated ? element : <Navigate to="/" replace />;
 };
+
 
 const App = () => {
   return (

@@ -19,7 +19,10 @@ const Login = () => {
         { withCredentials: true } // ✅ importante para cookies/sessão
       );
 
-      if (res.data?.user) {
+      if (res.data?.token) {
+        // 1. Salvar o token JWT no localStorage
+        localStorage.setItem('authToken', res.data.token);
+        
         setMessage("Login realizado com sucesso!");
         console.log("Usuário logado:", res.data.user);
 
