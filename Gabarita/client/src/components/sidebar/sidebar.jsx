@@ -1,76 +1,69 @@
-import React, { useState } from "react";
-import "./Sidebar.css";
-import {
-  Home,
-  BookOpen,
-  ClipboardList,
-  BarChart2,
-  Settings,
-  LogOut,
-  Menu,
-} from "lucide-react";
-import { Link } from "react-router-dom";
+// Gabarita/client/src/components/Sidebar/Sidebar.jsx
 
-export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import './Sidebar.css';
 
-  const toggleSidebar = () => {
-    setCollapsed(!collapsed);
-  };
+// Importando ícones da biblioteca react-icons
+import { 
+  AiOutlineHome, 
+  AiOutlineCalendar, 
+  AiOutlineEdit, 
+  AiOutlineBarChart, 
+  AiOutlineSetting,
+  AiOutlineRight 
+} from 'react-icons/ai';
+import { BsLayoutSidebar, BsLayoutSidebarReverse } from 'react-icons/bs'; // Novos ícones
+
+const Sidebar = ({ isSidebarOpen, toggleSidebar }) => { // Recebe props
+  const location = useLocation();
+
+  const navItems = [
+    { name: 'Comunidade', path: '/home', icon: AiOutlineHome },
+    { name: 'Banco de questões', path: '/questions', icon: AiOutlineCalendar },
+    { name: 'Simulados', path: '/simulations', icon: AiOutlineEdit },
+    { name: 'Estatísticas', path: '/stats', icon: AiOutlineBarChart },
+    { name: 'Configurações', path: '/settings', icon: AiOutlineSetting },
+  ];
+
+  // Determina qual ícone de toggle usar
+  const ToggleIcon = isSidebarOpen ? BsLayoutSidebarReverse : BsLayoutSidebar;
 
   return (
-    <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
-      {/* Topo */}
-      <div className="sidebar-top">
-        <h2 className="logo">Gabarita</h2>
-        <button className="collapse-btn" onClick={toggleSidebar}>
-          <Menu size={22} />
-        </button>
+    // Adiciona a classe 'closed' quando a sidebar está fechada
+    <div className={`sidebar-container ${isSidebarOpen ? '' : 'closed'}`}> 
+      {/* Cabeçalho com Logo e Ícone de Menu */}
+      <div className="sidebar-header">
+        <div className="sidebar-logo">
+          <img src=".../assets/images/logo_gabarita.png" alt="Gabarita+ Logo" className="logo-img" />
+          <span>Gabarita+</span>
+        </div>
+        {/* Adiciona o evento onClick para o toggle */}
+        <div className="sidebar-menu-icon" onClick={toggleSidebar}> 
+          <ToggleIcon size={24} />
+        </div>
       </div>
 
-      {/* Navegação */}
+      {/* Itens de Navegação */}
       <nav className="sidebar-nav">
-        <ul>
-          <li>
-            <Link to="/comunidade">
-              <Home size={20} />
-              <span>Comunidade</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/banco">
-              <BookOpen size={20} />
-              <span>Banco de Questões</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/simulados">
-              <ClipboardList size={20} />
-              <span>Simulados</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/estatisticas">
-              <BarChart2 size={20} />
-              <span>Estatísticas</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/configuracoes">
-              <Settings size={20} />
-              <span>Configurações</span>
-            </Link>
-          </li>
-        </ul>
+        {navItems.map((item) => (
+          <Link
+            key={item.name}
+            to={item.path}
+            className={`sidebar-item ${location.pathname === item.path ? 'active' : ''}`}
+          >
+            <div className="sidebar-item-content">
+              <item.icon size={24} className="sidebar-icon" />
+              {/* Mostra o texto apenas se a sidebar estiver aberta */}
+              {isSidebarOpen && <span className="sidebar-item-text">{item.name}</span>} 
+            </div>
+            {/* Mostra a seta apenas se a sidebar estiver aberta */}
+            {isSidebarOpen && <AiOutlineRight size={16} />} 
+          </Link>
+        ))}
       </nav>
-
-      {/* Rodapé */}
-      <div className="sidebar-footer">
-        <button className="logout-btn">
-          <LogOut size={20} />
-          <span>Sair</span>
-        </button>
-      </div>
     </div>
   );
-}
+};
+
+export default Sidebar;

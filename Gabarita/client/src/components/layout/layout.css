@@ -1,0 +1,20 @@
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.app-content {
+    /* Margem inicial para Sidebar aberta (250px) */
+    margin-left: 250px; 
+    padding: 20px;
+    flex-grow: 1;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease, width 0.3s ease; /* Adiciona transição */
+}
+
+/* Estilo para quando a Sidebar estiver fechada */
+.app-layout.sidebar-closed .app-content {
+    /* Margem para Sidebar fechada (80px) */
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
