@@ -1,11 +1,12 @@
 // Gabarita-Project/Gabarita/server/src/index.js
 
-// 1. Importações (usando 'require' para CommonJS)
+// 1. Importações (usando 'import' para ES Modules)
 import express, { json } from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
-import { betterAuth } from 'better-auth';
-import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { betterAuth } from "better-auth";
+
+import { prismaAdapter } from "better-auth/adapters/prisma";
 
 // 2. Inicialização
 const app = express();
@@ -14,7 +15,7 @@ const PORT = 5000;
 
 // 3. Configuração do better-auth
 const auth = betterAuth({
-  adapter: prismaAdapter(prisma),
+  adapter: prismaAdapter(prisma, {}),
   // Outras configurações (como segredo da sessão, etc.)
   secret: 'SEGREDO_MUITO_SEGURO_E_LONGO', // **ATENÇÃO: Mude isso para uma variável de ambiente!**
   session: {
