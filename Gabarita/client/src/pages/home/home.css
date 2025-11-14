@@ -62,6 +62,8 @@
 }
 
 .new-topic-button {
+    text-decoration: none; /* Remove sublinhado do Link */
+    display: inline-block;
     background-color: var(--secondary-dark); /* Roxo do Figma */
     color: var(--text-light);
     border: none;

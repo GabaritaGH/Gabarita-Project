@@ -4,6 +4,7 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
+import postRouter from './posts.js'; 
 import authRouter, { protect } from './auth.js'; // Importa o router e o middleware de proteção
 
 // 2. Inicialização
@@ -20,6 +21,7 @@ app.use(json());
 
 // 4. Rotas de Autenticação
 app.use('/api/auth', authRouter);
+app.use('/api/posts', postRouter);
 
 // 5. Rotas Protegidas (Exemplo)
 app.get('/api/profile', protect, (req, res) => {

@@ -1,44 +1,86 @@
 // Gabarita/client/src/pages/home/home.jsx
 
-import React from "react";
+import React, { useState, useEffect } from "react"; // <-- ADICIONADO useState e useEffect
+import { Link } from "react-router-dom";
 import "./home.css";
 import { AiOutlineSearch } from 'react-icons/ai'; // Ícone de pesquisa
 import TopicCard from "../../components/TopicCard/TopicCard.jsx"; // Importa o novo componente
 
-// Dados mockados baseados na sua print
-const mockTopics = [
-  { id: 1, title: 'Competência 1', author: 'Clara', avatarUrl: 'https://i.pravatar.cc/150?img=1' },
-  { id: 2, title: 'Geo Analítica', author: 'Thiago', avatarUrl: 'https://i.pravatar.cc/150?img=2' },
-  { id: 3, title: 'Ecologia', author: 'Miguel', avatarUrl: 'https://i.pravatar.cc/150?img=3' },
-  { id: 4, title: 'Bionômio de Newton', author: 'Clara', avatarUrl: 'https://i.pravatar.cc/150?img=1' },
-];
-
 const Home = ( ) => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/posts' );
+        if (!response.ok) {
+          throw new Error('Falha ao buscar posts.');
+        }
+        const data = await response.json();
+        setPosts(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="community-container">
+        <div className="community-card">
+          <p>Carregando tópicos...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="community-container">
+        <div className="community-card">
+          <p className="error-message">Erro ao carregar: {error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="community-container">
       <div className="community-card">
-      {/* Cabeçalho e Barra de Pesquisa */}
-      <header className="community-header">
-        <h1 className="community-title">Comunidade:</h1>
-        <div className="search-bar-container">
-          <input type="text" placeholder="Pesquise" className="search-input" />
-          <button className="search-button">
-            <AiOutlineSearch size={20} />
-          </button>
+        {/* Cabeçalho e Barra de Pesquisa */}
+        <header className="community-header">
+          <h1 className="community-title">Comunidade:</h1>
+          <div className="search-bar-container">
+            <input type="text" placeholder="Pesquise" className="search-input" />
+            <button className="search-button">
+              <AiOutlineSearch size={20} />
+            </button>
+          </div>
+        </header>
+
+        {/* Botão Novo Tópico */}
+        <div className="new-topic-section">
+          <Link to="/new-post" className="new-topic-button">
+            Novo tópico
+          </Link>
         </div>
-      </header>
 
-      {/* Botão Novo Tópico */}
-      <div className="new-topic-section">
-        <button className="new-topic-button">Novo tópico</button>
-      </div>
-
-      {/* Seção de Tópicos */}
-      <section className="topic-list">
-        {mockTopics.map(topic => (
-          <TopicCard key={topic.id} topic={topic} />
-        ))}
-      </section>
+        {/* Seção de Tópicos */}
+        <section className="topic-list">
+          {posts.length === 0 ? (
+            <p>Nenhum tópico encontrado. Crie o primeiro!</p>
+          ) : (
+            posts.map(post => (
+              <TopicCard key={post.id} topic={post} />
+            ))
+          )}
+        </section>
       </div>
     </div>
   );
