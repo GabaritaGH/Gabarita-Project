@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
+import Logo from '../../assets/images/logo_gabarita.png';
 
 // Importando ícones da biblioteca react-icons
 import { 
@@ -35,8 +36,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => { // Recebe props
       {/* Cabeçalho com Logo e Ícone de Menu */}
       <div className="sidebar-header">
         <div className="sidebar-logo">
-          <img src=".../assets/images/logo_gabarita.png" alt="Gabarita+ Logo" className="logo-img" />
-          <span>Gabarita+</span>
+          <img src={Logo} alt="Gabarita+ Logo" className="logo-img" />
         </div>
         {/* Adiciona o evento onClick para o toggle */}
         <div className="sidebar-menu-icon" onClick={toggleSidebar}> 

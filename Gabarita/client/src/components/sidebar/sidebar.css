@@ -31,9 +31,16 @@
 }
 
 .sidebar-container.closed .sidebar-logo span,
-.sidebar-container.closed .sidebar-item-text,
+.sidebar-container.closed .sidebar-item-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+/* Oculta a seta de navegação */
 .sidebar-container.closed .sidebar-item-content > svg:last-child {
-    display: none; /* Esconde o texto e a seta de navegação */
+    display: none; 
 }
 
 .sidebar-container.closed .sidebar-header {
@@ -60,7 +67,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px 20px 20px;
+    padding: 10px 20px 20px 20px;
     border-bottom: 1px solid var(--sidebar-border-color);
     margin-bottom: 20px;
 }
@@ -68,16 +75,18 @@
 .sidebar-logo {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
+    /* Removido font-size e font-weight pois o logo é uma imagem */
     color: var(--sidebar-logo-color);
+    width: 100%; /* Ocupa todo o espaço disponível no header */
+    max-width: 150px; /* Limite o tamanho do logo para não estourar */
 }
 
 .logo-img {
-    width: 30px; /* Ajuste conforme o tamanho real da sua logo */
-    height: 30px;
-    margin-right: 10px;
+    width: 100%; /* Preenche o contêiner .sidebar-logo */
+    height: auto; /* Mantém a proporção */
+    max-height: 50px; /* Limite a altura para não ficar muito grande */
 }
+
 
 .sidebar-menu-icon {
     font-size: 1.5rem;
@@ -115,6 +124,7 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
+    transition: all 0.3s ease;
 }
 
 .sidebar-icon {
@@ -126,4 +136,5 @@
 
 .sidebar-item-text {
     flex-grow: 1;
+    transition: opacity 0.3s ease;
 }
