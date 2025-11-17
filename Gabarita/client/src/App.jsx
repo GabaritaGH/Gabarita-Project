@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         {/* ✅ Rota Home agora usa o Layout */}
         <Route path="/new-post" element={<ProtectedRoute element={<Layout><NewPost /></Layout>} />} />
-        <Route path="/post/:id" element={<PostView />} />
+        <Route path="/post/:id" element={<ProtectedRoute element={<Layout><PostView /></Layout>} />}  />
         <Route path="/home" element={<ProtectedRoute element={<Layout><Home /></Layout>} />} />
       </Routes>
     </div>

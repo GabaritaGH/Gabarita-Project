@@ -11,6 +11,11 @@ const Home = ( ) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const handleDeletePost = (deletedPostId) => { // <-- NOVO: Função para atualizar a lista
+    // Remove o post deletado da lista local
+    setPosts(prevPosts => prevPosts.filter(post => post.id !== deletedPostId));
+  };
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -77,7 +82,11 @@ const Home = ( ) => {
             <p>Nenhum tópico encontrado. Crie o primeiro!</p>
           ) : (
             posts.map(post => (
-              <TopicCard key={post.id} post={post} />
+              <TopicCard 
+                key={post.id} 
+                post={post} 
+                onDelete={handleDeletePost} // <-- NOVO: Passa a função de exclusão
+              />
             ))
           )}
         </section>
