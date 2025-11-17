@@ -21,43 +21,4 @@
     border-color: #9370db; /* Destaque ao passar o mouse */
 }
 
-.topic-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.topic-card-subject {
-    font-size: 1rem;
-    color: #9370db; /* Cor do tema */
-    font-weight: 500;
-}
-
-/* O estilo da data original (topic-card-date) foi removido do JSX */
-
-.topic-card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    margin: 5px 0;
-}
-
-.topic-card-footer {
-    display: flex;
-    align-items: center; /* Alinha verticalmente */
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #999;
-}
-
-.topic-card-author {
-    color: #999;
-    text-decoration: none; /* Remove o underline */
-}
-
-.topic-card-date-footer {
-    font-size: 0.85rem; /* Tamanho menor */
-    color: #aaa; /* Cor mais sutil */
-    font-weight: normal;
-    margin-left: 5px; /* Pequeno espaçamento do autor */
-}
+/* ... (restante do seu CSS existente) */
