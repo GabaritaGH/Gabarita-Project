@@ -4,6 +4,7 @@ import Layout from "./components/layout/layout.jsx";
 import Login from "./pages/auth/login/login.jsx";
 import Register from "./pages/auth/register/register.jsx";
 import Home from "./pages/home/home.jsx";
+import PostView from './pages/postView/PostView.jsx';
 import NewPost from "./pages/newPost/newPost.jsx";
 
 // Componente de proteção de rota
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         {/* ✅ Rota Home agora usa o Layout */}
         <Route path="/new-post" element={<ProtectedRoute element={<Layout><NewPost /></Layout>} />} />
+        <Route path="/post/:id" element={<PostView />} />
         <Route path="/home" element={<ProtectedRoute element={<Layout><Home /></Layout>} />} />
       </Routes>
     </div>

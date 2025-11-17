@@ -7,24 +7,33 @@ import { protect } from './auth.js'; // Importa o middleware de proteção
 const router = Router();
 const prisma = new PrismaClient();
 
-// Rota POST /api/posts - Cria um novo post (JÁ EXISTENTE)
+// Rota POST /api/posts - Cria um novo post
 router.post('/', protect, async (req, res) => {
-  const { title, content } = req.body;
+  const { title, subject, content } = req.body; // Adicionado 'subject'
   
   // O ID do usuário é injetado no req.user pelo middleware 'protect'
   const authorId = req.user.id; 
 
-  if (!title || !content) {
-    return res.status(400).json({ error: 'Título e conteúdo são obrigatórios.' });
+  if (!title || !subject || !content) { // Adicionada validação para 'subject'
+    return res.status(400).json({ error: 'Título, assunto e conteúdo são obrigatórios.' });
   }
 
   try {
     const newPost = await prisma.post.create({
       data: {
         title,
+        subject, // Adicionado 'subject'
         content,
         authorId,
         published: true, // Publica por padrão
+      },
+      include: { // Incluir o autor no retorno para o frontend
+        author: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     });
 
@@ -35,7 +44,9 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
-// Rota GET /api/posts - Busca todos os posts (NOVA ROTA)
+export default router;
+
+// Rota GET /api/posts - Busca todos os posts (não precisa de proteção por enquanto)
 router.get('/', async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
@@ -59,4 +70,47 @@ router.get('/', async (req, res) => {
   }
 });
 
-export default router;
+// Rota GET /api/posts/:id - Busca um post individual e seus comentários
+router.get('/:id', async (req, res) => {
+  const postId = parseInt(req.params.id);
+
+  if (isNaN(postId)) {
+    return res.status(400).json({ error: 'ID do post inválido.' });
+  }
+
+  try {
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        comments: {
+          orderBy: { createdAt: 'asc' },
+          include: {
+            author: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post não encontrado.' });
+    }
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.error('Erro ao buscar post individual:', error);
+    res.status(500).json({ error: 'Erro interno do servidor ao buscar o post.' });
+  }
+});

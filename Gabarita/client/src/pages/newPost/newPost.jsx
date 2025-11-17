@@ -1,5 +1,3 @@
-// Gabarita/client/src/pages/newPost/NewPost.jsx
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -7,6 +5,7 @@ import './NewPost.css';
 
 const NewPost = () => {
   const [formData, setFormData] = useState({
+    subject: '', // Assunto (não está no modelo Post, mas é útil para categorização)
     title: '',   // Título (Post.title)
     content: '', // Mensagem (Post.content)
   });
@@ -38,8 +37,9 @@ const NewPost = () => {
         },
         body: JSON.stringify({
           title: formData.title,
+          subject: formData.subject, // Incluir o campo 'subject'
           content: formData.content,
-        } ),
+        }),
       });
 
       if (!response.ok) {

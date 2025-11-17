@@ -77,7 +77,7 @@ const Home = ( ) => {
             <p>Nenhum tópico encontrado. Crie o primeiro!</p>
           ) : (
             posts.map(post => (
-              <TopicCard key={post.id} topic={post} />
+              <TopicCard key={post.id} post={post} />
             ))
           )}
         </section>

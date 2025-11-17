@@ -1,0 +1,95 @@
+/* Gabarita/client/src/pages/postView/PostView.css */
+
+.post-view-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #f0f0f0;
+}
+
+.back-to-community {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #9370db;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.back-to-community:hover {
+    color: #b0a3e0;
+}
+
+.post-view-title {
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3a3a5a;
+}
+
+.post-items-list {
+    margin-bottom: 40px;
+}
+
+/* Seção de Resposta (Comentário) */
+.comment-reply-section {
+    background-color: #2a2a4a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #3a3a5a;
+}
+
+.reply-title {
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.reply-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #5a5a7a;
+    border-radius: 4px;
+    background-color: #1a1a2e;
+    color: #f0f0f0;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.reply-form textarea:focus {
+    outline: none;
+    border-color: #9370db;
+}
+
+.reply-button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.reply-button:hover {
+    background-color: #5a4acb;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}

@@ -1,0 +1,69 @@
+/* Gabarita/client/src/components/CommentCard/CommentCard.css */
+
+.comment-card {
+    background-color: #2a2a4a; /* Um pouco mais claro que o fundo principal */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #f0f0f0;
+    border: 1px solid #3a3a5a;
+}
+
+.main-post-card {
+    background-color: #1a1a2e; /* Fundo principal para o post */
+    border: 2px solid #5a5a7a;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3a3a5a;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #6a5acd; /* Cor de destaque */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.comment-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #9370db; /* Cor de destaque para o autor */
+}
+
+.comment-date {
+    font-size: 0.8em;
+    color: #aaa;
+}
+
+.comment-content {
+    line-height: 1.6;
+}
+
+.post-content-title {
+    font-size: 1.1em;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #3a3a5a;
+}
