@@ -1,5 +1,3 @@
-// Gabarita/server/src/comment.js
-
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { protect } from './auth.js';
@@ -7,10 +5,10 @@ import { protect } from './auth.js';
 const router = Router();
 const prisma = new PrismaClient();
 
-// Rota para criar um novo comentário (PROTEGIDA)
+
 router.post('/', protect, async (req, res) => {
   const { content, postId } = req.body;
-  const authorId = req.user.id; // ID do usuário injetado pelo middleware 'protect'
+  const authorId = req.user.id; 
 
   if (!content || !postId) {
     return res.status(400).json({ message: 'Conteúdo e ID do post são obrigatórios.' });

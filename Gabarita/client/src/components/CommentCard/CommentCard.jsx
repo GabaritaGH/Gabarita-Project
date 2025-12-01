@@ -1,5 +1,3 @@
-// Gabarita/client/src/components/CommentCard/CommentCard.jsx
-
 import React from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -8,7 +6,7 @@ import './CommentCard.css';
 const CommentCard = ({ item }) => {
   const { author, content, createdAt, isMainPost } = item;
 
-  // Função para simular um avatar com a primeira letra do nome
+
   const getAvatar = (name) => {
     return name ? name[0].toUpperCase() : '?';
   };
