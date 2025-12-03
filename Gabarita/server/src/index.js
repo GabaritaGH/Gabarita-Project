@@ -3,14 +3,13 @@
 // 1. Importações
 import express, { json } from 'express';
 import cors from 'cors';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './prisma.js'; 
 import postRouter from './posts.js'; 
 import commentRouter from './comments.js';
 import authRouter, { protect } from './auth.js'; // Importa o router e o middleware de proteção
 
 // 2. Inicialização
 const app = express();
-const prisma = new PrismaClient();
 const PORT = 5000;
 
 // 3. Middlewares

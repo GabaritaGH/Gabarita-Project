@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './prisma.js'; 
 
-const prisma = new PrismaClient();
 const router = Router();
 
 // **ATENÇÃO: Use uma variável de ambiente real para o segredo!**

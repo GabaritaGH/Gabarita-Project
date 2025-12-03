@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './prisma.js'; 
 import { protect } from './auth.js'; 
 
 const router = Router();
-const prisma = new PrismaClient();
 
 router.post('/', protect, async (req, res) => {
   const { title, subject, content } = req.body; 

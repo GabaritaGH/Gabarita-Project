@@ -9,7 +9,7 @@ import NewPost from "./pages/newPost/newPost.jsx";
 
 // Componente de proteção de rota
 const ProtectedRoute = ({ element }) => {
-  const isAuthenticated = localStorage.getItem("authToken"); // <--- CORREÇÃO: Verifica o localStorage
+  const isAuthenticated = localStorage.getItem("authToken"); 
   return isAuthenticated ? element : <Navigate to="/" replace />;
 };
 
@@ -20,7 +20,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* ✅ Rota Home agora usa o Layout */}
         <Route path="/new-post" element={<ProtectedRoute element={<Layout><NewPost /></Layout>} />} />
         <Route path="/post/:id" element={<ProtectedRoute element={<Layout><PostView /></Layout>} />}  />
         <Route path="/home" element={<ProtectedRoute element={<Layout><Home /></Layout>} />} />
