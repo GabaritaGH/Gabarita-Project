@@ -6,6 +6,7 @@ import cors from 'cors';
 import { prisma } from './prisma.js'; 
 import postRouter from './posts.js'; 
 import commentRouter from './comments.js';
+import questionsRoutes from '../routes/questionRoutes.js';
 import authRouter, { protect } from './auth.js'; // Importa o router e o middleware de proteção
 
 // 2. Inicialização
@@ -23,6 +24,7 @@ app.use(json());
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
+app.use('/api/questions', questionsRoutes);
 
 // 5. Rotas Protegidas (Exemplo)
 app.get('/api/profile', protect, (req, res) => {
