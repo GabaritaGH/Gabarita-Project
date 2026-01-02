@@ -16,12 +16,16 @@ const Login = () => {
       const res = await axios.post(
         "http://localhost:5000/api/auth/signin",
         { email, password },
-        { withCredentials: true } // ✅ importante para cookies/sessão
+        { withCredentials: true } // ✅ importante para cookies/sessã
       );
 
       if (res.data?.token) {
         // 1. Salvar o token JWT no localStorage
         localStorage.setItem('authToken', res.data.token);
+
+        if (res.data.user && res.data.user.id) {
+            localStorage.setItem('userId', res.data.user.id);
+        }
         
         setMessage("Login realizado com sucesso!");
         console.log("Usuário logado:", res.data.user);

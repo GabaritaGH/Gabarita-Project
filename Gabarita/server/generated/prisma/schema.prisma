@@ -18,7 +18,8 @@ model User {
   posts    Post[]
   comments Comment[]
 
-  tests tests[]
+  tests           Test[]
+  questionAnswers questionAnswer[] // Relação inversa adicionada
 }
 
 model Post {
@@ -46,11 +47,39 @@ model Comment {
   updatedAt DateTime @updatedAt
 }
 
-model tests {
-  id        Int      @id @default(autoincrement())
-  name      String
-  authorId  Int
-  author    User     @relation(fields: [authorId], references: [id]) // relation to User
+model Test {
+  id       Int     @id @default(autoincrement())
+  title    String
+  area     String?
+  authorId Int
+  author   User    @relation(fields: [authorId], references: [id])
+
+  answers questionAnswer[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("tests")
+}
+
+model questionAnswer {
+  id String @id @default(uuid())
+
+  // Relacionamentos
+  authorId Int
+  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  testId Int?
+  test   Test? @relation(fields: [testId], references: [id])
+
+  // Dados da Resposta
+  questionId     String // ID da questão (vindo do JSON ou API externa)
+  questionYear   Int? // Opcional, útil para filtros
+  selectedOption String // A letra que ele marcou (ex: "A", "B")
+  isCorrect      Boolean // Se acertou ou não
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([authorId, questionId])
 }

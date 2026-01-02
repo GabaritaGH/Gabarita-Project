@@ -5,10 +5,16 @@ import { Link } from 'react-router-dom';
 import { AiOutlineArrowLeft, AiOutlineScissor } from 'react-icons/ai';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import './questions.css';
+import { useNavigate } from 'react-router-dom';
+import { getUserId, isAuthenticated } from '../../utils/auth';
 
 const Questions = () => {
     // URL do SEU servidor (Backend)
     const API_BASE = 'http://localhost:5000/api/questions';
+    const API_ANSWERS = 'http://localhost:5000/api/answers';
+
+    const navigate = useNavigate();
+    const [userHistory, setUserHistory] = useState({});
 
     // --- ESTADOS GERAIS ---
     const [showQuestions, setShowQuestions] = useState(false);
@@ -46,12 +52,40 @@ const Questions = () => {
                 if (!response.ok) throw new Error('Erro ao buscar exames');
                 const data = await response.json();
                 setExams(data);
+                
             } catch (error) {
                 console.error("Erro:", error);
             }
         };
         fetchExams();
     }, []);
+
+    useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    const fetchHistory = async () => {
+        try {
+            const response = await fetch(`${API_ANSWERS}/${userId}`);
+            if (!response.ok) throw new Error('Erro ao buscar histórico');
+
+            const data = await response.json();
+
+            // Transformar em mapa por questionId
+            const historyMap = {};
+            data.forEach(item => {
+                historyMap[item.questionId] = item;
+            });
+
+            setUserHistory(historyMap);
+        } catch (error) {
+            console.error("Erro ao carregar histórico:", error);
+        }
+    };
+
+    fetchHistory();
+}, []);
+
 
     // Função auxiliar para saber se a questão precisa de sufixo de língua
     const isLanguageQuestion = (year, index) => {
@@ -180,6 +214,24 @@ const Questions = () => {
         }
     };
 
+    useEffect(() => {
+    if (!currentQuestionData) return;
+
+    let qId = currentQuestionData.content.index;
+
+    if (isLanguageQuestion(filters.year, qId)) {
+        qId = `${qId}-${language}`;
+    }
+
+    const historyItem = userHistory[qId];
+
+    if (historyItem) {
+        setSelectedOption(historyItem.selectedOption);
+        setIsAnswered(true);
+    }
+}, [currentQuestionData, userHistory, language]);
+
+
     // --- NAVEGAÇÃO (Anterior / Próxima) ---
     const handleNextQuestion = () => {
         if (currentIndex < questionList.length - 1) {
@@ -220,9 +272,67 @@ const Questions = () => {
         });
     };
 
-    const handleAnswerSubmit = () => {
+    const handleAnswerSubmit = async () => {
+        // 1. Validações básicas
         if (!selectedOption) return;
-        setIsAnswered(true); // Trava a tela e revela as cores
+        
+        // Tenta pegar o ID do usuário do LocalStorage (ajuste a chave 'userId' conforme seu sistema de login)
+        const storedUserId = localStorage.getItem('userId'); 
+        
+        if (!storedUserId) {
+            alert("Você precisa estar logado para salvar seu progresso!");
+            // Se quiser, pode deixar responder visualmente mesmo sem logar, 
+            // mas o ideal é avisar ou redirecionar.
+        }
+
+        // 2. Trava a tela e revela as cores (Feedback Visual Imediato)
+        setIsAnswered(true); 
+
+        // 3. Prepara os dados para o Backend
+        const isCorrect = selectedOption === currentQuestionData.content.correctAlternative;
+        
+        // Recalcula o ID da questão (para garantir que questões de inglês/espanhol tenham o sufixo correto)
+        let finalQuestionId = currentQuestionData.content.index;
+        if (isLanguageQuestion(filters.year, finalQuestionId)) {
+            finalQuestionId = `${finalQuestionId}-${language}`;
+        }
+
+        const payload = {
+            userId: storedUserId,
+            questionId: finalQuestionId, // Ex: "14" ou "2-ingles"
+            questionYear: filters.year,
+            selectedOption: selectedOption,
+            isCorrect: isCorrect,
+        };
+
+        // 4. Envia para o servidor
+        if (storedUserId) {
+    try {
+        const response = await fetch(API_ANSWERS, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            console.error("Erro ao salvar resposta no banco");
+        } else {
+            // ✅ ATUALIZA O HISTÓRICO LOCAL
+            setUserHistory(prev => ({
+                ...prev,
+                [finalQuestionId]: {
+                    selectedOption,
+                    isCorrect
+                }
+            }));
+        }
+    } catch (error) {
+        console.error("Erro de conexão:", error);
+    }
+}
+
     };
 
     // Função para mudar a língua e recarregar se necessário

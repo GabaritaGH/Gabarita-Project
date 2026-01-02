@@ -149,10 +149,23 @@ exports.Prisma.CommentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TestsScalarFieldEnum = {
+exports.Prisma.TestScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  title: 'title',
+  area: 'area',
   authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.QuestionAnswerScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  testId: 'testId',
+  questionId: 'questionId',
+  questionYear: 'questionYear',
+  selectedOption: 'selectedOption',
+  isCorrect: 'isCorrect',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -167,12 +180,18 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
   Comment: 'Comment',
-  tests: 'tests'
+  Test: 'Test',
+  questionAnswer: 'questionAnswer'
 };
 
 /**

@@ -22,7 +22,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => { // Recebe props
   const navItems = [
     { name: 'Comunidade', path: '/home', icon: AiOutlineHome },
     { name: 'Banco de questões', path: '/questions', icon: AiOutlineCalendar },
-    { name: 'Simulados', path: '/simulations', icon: AiOutlineEdit },
+    { name: 'Simulados', path: '/simulados', icon: AiOutlineEdit },
     { name: 'Estatísticas', path: '/stats', icon: AiOutlineBarChart },
     { name: 'Configurações', path: '/settings', icon: AiOutlineSetting },
   ];
