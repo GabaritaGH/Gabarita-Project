@@ -297,10 +297,14 @@ const Questions = () => {
             finalQuestionId = `${finalQuestionId}-${language}`;
         }
 
+        const currentListItem = questionList[currentIndex];
+        const finalDiscipline = currentListItem?.discipline || filters.discipline || "geral";
+
         const payload = {
             userId: storedUserId,
             questionId: finalQuestionId, // Ex: "14" ou "2-ingles"
             questionYear: filters.year,
+            discipline: finalDiscipline,
             selectedOption: selectedOption,
             isCorrect: isCorrect,
         };

@@ -38,6 +38,11 @@ export type Test = $Result.DefaultSelection<Prisma.$TestPayload>
  * 
  */
 export type questionAnswer = $Result.DefaultSelection<Prisma.$questionAnswerPayload>
+/**
+ * Model UserStatistics
+ * 
+ */
+export type UserStatistics = $Result.DefaultSelection<Prisma.$UserStatisticsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -205,6 +210,16 @@ export class PrismaClient<
     * ```
     */
   get questionAnswer(): Prisma.questionAnswerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userStatistics`: Exposes CRUD operations for the **UserStatistics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserStatistics
+    * const userStatistics = await prisma.userStatistics.findMany()
+    * ```
+    */
+  get userStatistics(): Prisma.UserStatisticsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -643,7 +658,8 @@ export namespace Prisma {
     Post: 'Post',
     Comment: 'Comment',
     Test: 'Test',
-    questionAnswer: 'questionAnswer'
+    questionAnswer: 'questionAnswer',
+    UserStatistics: 'UserStatistics'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -659,7 +675,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post" | "comment" | "test" | "questionAnswer"
+      modelProps: "user" | "post" | "comment" | "test" | "questionAnswer" | "userStatistics"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1033,6 +1049,80 @@ export namespace Prisma {
           }
         }
       }
+      UserStatistics: {
+        payload: Prisma.$UserStatisticsPayload<ExtArgs>
+        fields: Prisma.UserStatisticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserStatisticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserStatisticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>
+          }
+          findFirst: {
+            args: Prisma.UserStatisticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserStatisticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>
+          }
+          findMany: {
+            args: Prisma.UserStatisticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>[]
+          }
+          create: {
+            args: Prisma.UserStatisticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>
+          }
+          createMany: {
+            args: Prisma.UserStatisticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserStatisticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>[]
+          }
+          delete: {
+            args: Prisma.UserStatisticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>
+          }
+          update: {
+            args: Prisma.UserStatisticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserStatisticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserStatisticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserStatisticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserStatisticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatisticsPayload>
+          }
+          aggregate: {
+            args: Prisma.UserStatisticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserStatistics>
+          }
+          groupBy: {
+            args: Prisma.UserStatisticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserStatisticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserStatisticsCountArgs<ExtArgs>
+            result: $Utils.Optional<UserStatisticsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1130,6 +1220,7 @@ export namespace Prisma {
     comment?: CommentOmit
     test?: TestOmit
     questionAnswer?: questionAnswerOmit
+    userStatistics?: UserStatisticsOmit
   }
 
   /* Types for Logging */
@@ -1214,6 +1305,7 @@ export namespace Prisma {
     comments: number
     tests: number
     questionAnswers: number
+    userStatistics: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1221,6 +1313,7 @@ export namespace Prisma {
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     tests?: boolean | UserCountOutputTypeCountTestsArgs
     questionAnswers?: boolean | UserCountOutputTypeCountQuestionAnswersArgs
+    userStatistics?: boolean | UserCountOutputTypeCountUserStatisticsArgs
   }
 
   // Custom InputTypes
@@ -1260,6 +1353,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountQuestionAnswersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: questionAnswerWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserStatisticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserStatisticsWhereInput
   }
 
 
@@ -1539,6 +1639,7 @@ export namespace Prisma {
     comments?: boolean | User$commentsArgs<ExtArgs>
     tests?: boolean | User$testsArgs<ExtArgs>
     questionAnswers?: boolean | User$questionAnswersArgs<ExtArgs>
+    userStatistics?: boolean | User$userStatisticsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1575,6 +1676,7 @@ export namespace Prisma {
     comments?: boolean | User$commentsArgs<ExtArgs>
     tests?: boolean | User$testsArgs<ExtArgs>
     questionAnswers?: boolean | User$questionAnswersArgs<ExtArgs>
+    userStatistics?: boolean | User$userStatisticsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1587,6 +1689,7 @@ export namespace Prisma {
       comments: Prisma.$CommentPayload<ExtArgs>[]
       tests: Prisma.$TestPayload<ExtArgs>[]
       questionAnswers: Prisma.$questionAnswerPayload<ExtArgs>[]
+      userStatistics: Prisma.$UserStatisticsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1993,6 +2096,7 @@ export namespace Prisma {
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tests<T extends User$testsArgs<ExtArgs> = {}>(args?: Subset<T, User$testsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     questionAnswers<T extends User$questionAnswersArgs<ExtArgs> = {}>(args?: Subset<T, User$questionAnswersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$questionAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userStatistics<T extends User$userStatisticsArgs<ExtArgs> = {}>(args?: Subset<T, User$userStatisticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2509,6 +2613,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: QuestionAnswerScalarFieldEnum | QuestionAnswerScalarFieldEnum[]
+  }
+
+  /**
+   * User.userStatistics
+   */
+  export type User$userStatisticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    where?: UserStatisticsWhereInput
+    orderBy?: UserStatisticsOrderByWithRelationInput | UserStatisticsOrderByWithRelationInput[]
+    cursor?: UserStatisticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserStatisticsScalarFieldEnum | UserStatisticsScalarFieldEnum[]
   }
 
   /**
@@ -6032,6 +6160,7 @@ export namespace Prisma {
     testId: number | null
     questionId: string | null
     questionYear: number | null
+    discipline: string | null
     selectedOption: string | null
     isCorrect: boolean | null
     createdAt: Date | null
@@ -6044,6 +6173,7 @@ export namespace Prisma {
     testId: number | null
     questionId: string | null
     questionYear: number | null
+    discipline: string | null
     selectedOption: string | null
     isCorrect: boolean | null
     createdAt: Date | null
@@ -6056,6 +6186,7 @@ export namespace Prisma {
     testId: number
     questionId: number
     questionYear: number
+    discipline: number
     selectedOption: number
     isCorrect: number
     createdAt: number
@@ -6082,6 +6213,7 @@ export namespace Prisma {
     testId?: true
     questionId?: true
     questionYear?: true
+    discipline?: true
     selectedOption?: true
     isCorrect?: true
     createdAt?: true
@@ -6094,6 +6226,7 @@ export namespace Prisma {
     testId?: true
     questionId?: true
     questionYear?: true
+    discipline?: true
     selectedOption?: true
     isCorrect?: true
     createdAt?: true
@@ -6106,6 +6239,7 @@ export namespace Prisma {
     testId?: true
     questionId?: true
     questionYear?: true
+    discipline?: true
     selectedOption?: true
     isCorrect?: true
     createdAt?: true
@@ -6205,6 +6339,7 @@ export namespace Prisma {
     testId: number | null
     questionId: string
     questionYear: number | null
+    discipline: string
     selectedOption: string
     isCorrect: boolean
     createdAt: Date
@@ -6236,6 +6371,7 @@ export namespace Prisma {
     testId?: boolean
     questionId?: boolean
     questionYear?: boolean
+    discipline?: boolean
     selectedOption?: boolean
     isCorrect?: boolean
     createdAt?: boolean
@@ -6250,6 +6386,7 @@ export namespace Prisma {
     testId?: boolean
     questionId?: boolean
     questionYear?: boolean
+    discipline?: boolean
     selectedOption?: boolean
     isCorrect?: boolean
     createdAt?: boolean
@@ -6264,6 +6401,7 @@ export namespace Prisma {
     testId?: boolean
     questionId?: boolean
     questionYear?: boolean
+    discipline?: boolean
     selectedOption?: boolean
     isCorrect?: boolean
     createdAt?: boolean
@@ -6278,13 +6416,14 @@ export namespace Prisma {
     testId?: boolean
     questionId?: boolean
     questionYear?: boolean
+    discipline?: boolean
     selectedOption?: boolean
     isCorrect?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type questionAnswerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "testId" | "questionId" | "questionYear" | "selectedOption" | "isCorrect" | "createdAt" | "updatedAt", ExtArgs["result"]["questionAnswer"]>
+  export type questionAnswerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "testId" | "questionId" | "questionYear" | "discipline" | "selectedOption" | "isCorrect" | "createdAt" | "updatedAt", ExtArgs["result"]["questionAnswer"]>
   export type questionAnswerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     test?: boolean | questionAnswer$testArgs<ExtArgs>
@@ -6310,6 +6449,7 @@ export namespace Prisma {
       testId: number | null
       questionId: string
       questionYear: number | null
+      discipline: string
       selectedOption: string
       isCorrect: boolean
       createdAt: Date
@@ -6744,6 +6884,7 @@ export namespace Prisma {
     readonly testId: FieldRef<"questionAnswer", 'Int'>
     readonly questionId: FieldRef<"questionAnswer", 'String'>
     readonly questionYear: FieldRef<"questionAnswer", 'Int'>
+    readonly discipline: FieldRef<"questionAnswer", 'String'>
     readonly selectedOption: FieldRef<"questionAnswer", 'String'>
     readonly isCorrect: FieldRef<"questionAnswer", 'Boolean'>
     readonly createdAt: FieldRef<"questionAnswer", 'DateTime'>
@@ -7182,6 +7323,1280 @@ export namespace Prisma {
 
 
   /**
+   * Model UserStatistics
+   */
+
+  export type AggregateUserStatistics = {
+    _count: UserStatisticsCountAggregateOutputType | null
+    _avg: UserStatisticsAvgAggregateOutputType | null
+    _sum: UserStatisticsSumAggregateOutputType | null
+    _min: UserStatisticsMinAggregateOutputType | null
+    _max: UserStatisticsMaxAggregateOutputType | null
+  }
+
+  export type UserStatisticsAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    totalSimulados: number | null
+    questionsDone: number | null
+    questionsRight: number | null
+    questionsWrong: number | null
+    scoreNatureza: number | null
+    scoreHumanas: number | null
+    scoreLinguagens: number | null
+    scoreMatematica: number | null
+    totalNatureza: number | null
+    totalHumanas: number | null
+    totalLinguagens: number | null
+    totalMatematica: number | null
+  }
+
+  export type UserStatisticsSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    totalSimulados: number | null
+    questionsDone: number | null
+    questionsRight: number | null
+    questionsWrong: number | null
+    scoreNatureza: number | null
+    scoreHumanas: number | null
+    scoreLinguagens: number | null
+    scoreMatematica: number | null
+    totalNatureza: number | null
+    totalHumanas: number | null
+    totalLinguagens: number | null
+    totalMatematica: number | null
+  }
+
+  export type UserStatisticsMinAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    totalSimulados: number | null
+    questionsDone: number | null
+    questionsRight: number | null
+    questionsWrong: number | null
+    scoreNatureza: number | null
+    scoreHumanas: number | null
+    scoreLinguagens: number | null
+    scoreMatematica: number | null
+    totalNatureza: number | null
+    totalHumanas: number | null
+    totalLinguagens: number | null
+    totalMatematica: number | null
+    updatedAt: Date | null
+  }
+
+  export type UserStatisticsMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    totalSimulados: number | null
+    questionsDone: number | null
+    questionsRight: number | null
+    questionsWrong: number | null
+    scoreNatureza: number | null
+    scoreHumanas: number | null
+    scoreLinguagens: number | null
+    scoreMatematica: number | null
+    totalNatureza: number | null
+    totalHumanas: number | null
+    totalLinguagens: number | null
+    totalMatematica: number | null
+    updatedAt: Date | null
+  }
+
+  export type UserStatisticsCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalSimulados: number
+    questionsDone: number
+    questionsRight: number
+    questionsWrong: number
+    scoreNatureza: number
+    scoreHumanas: number
+    scoreLinguagens: number
+    scoreMatematica: number
+    totalNatureza: number
+    totalHumanas: number
+    totalLinguagens: number
+    totalMatematica: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserStatisticsAvgAggregateInputType = {
+    id?: true
+    userId?: true
+    totalSimulados?: true
+    questionsDone?: true
+    questionsRight?: true
+    questionsWrong?: true
+    scoreNatureza?: true
+    scoreHumanas?: true
+    scoreLinguagens?: true
+    scoreMatematica?: true
+    totalNatureza?: true
+    totalHumanas?: true
+    totalLinguagens?: true
+    totalMatematica?: true
+  }
+
+  export type UserStatisticsSumAggregateInputType = {
+    id?: true
+    userId?: true
+    totalSimulados?: true
+    questionsDone?: true
+    questionsRight?: true
+    questionsWrong?: true
+    scoreNatureza?: true
+    scoreHumanas?: true
+    scoreLinguagens?: true
+    scoreMatematica?: true
+    totalNatureza?: true
+    totalHumanas?: true
+    totalLinguagens?: true
+    totalMatematica?: true
+  }
+
+  export type UserStatisticsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalSimulados?: true
+    questionsDone?: true
+    questionsRight?: true
+    questionsWrong?: true
+    scoreNatureza?: true
+    scoreHumanas?: true
+    scoreLinguagens?: true
+    scoreMatematica?: true
+    totalNatureza?: true
+    totalHumanas?: true
+    totalLinguagens?: true
+    totalMatematica?: true
+    updatedAt?: true
+  }
+
+  export type UserStatisticsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalSimulados?: true
+    questionsDone?: true
+    questionsRight?: true
+    questionsWrong?: true
+    scoreNatureza?: true
+    scoreHumanas?: true
+    scoreLinguagens?: true
+    scoreMatematica?: true
+    totalNatureza?: true
+    totalHumanas?: true
+    totalLinguagens?: true
+    totalMatematica?: true
+    updatedAt?: true
+  }
+
+  export type UserStatisticsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalSimulados?: true
+    questionsDone?: true
+    questionsRight?: true
+    questionsWrong?: true
+    scoreNatureza?: true
+    scoreHumanas?: true
+    scoreLinguagens?: true
+    scoreMatematica?: true
+    totalNatureza?: true
+    totalHumanas?: true
+    totalLinguagens?: true
+    totalMatematica?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserStatisticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserStatistics to aggregate.
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatistics to fetch.
+     */
+    orderBy?: UserStatisticsOrderByWithRelationInput | UserStatisticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserStatisticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatistics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatistics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserStatistics
+    **/
+    _count?: true | UserStatisticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserStatisticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserStatisticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserStatisticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserStatisticsMaxAggregateInputType
+  }
+
+  export type GetUserStatisticsAggregateType<T extends UserStatisticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserStatistics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserStatistics[P]>
+      : GetScalarType<T[P], AggregateUserStatistics[P]>
+  }
+
+
+
+
+  export type UserStatisticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserStatisticsWhereInput
+    orderBy?: UserStatisticsOrderByWithAggregationInput | UserStatisticsOrderByWithAggregationInput[]
+    by: UserStatisticsScalarFieldEnum[] | UserStatisticsScalarFieldEnum
+    having?: UserStatisticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserStatisticsCountAggregateInputType | true
+    _avg?: UserStatisticsAvgAggregateInputType
+    _sum?: UserStatisticsSumAggregateInputType
+    _min?: UserStatisticsMinAggregateInputType
+    _max?: UserStatisticsMaxAggregateInputType
+  }
+
+  export type UserStatisticsGroupByOutputType = {
+    id: number
+    userId: number
+    totalSimulados: number
+    questionsDone: number
+    questionsRight: number
+    questionsWrong: number
+    scoreNatureza: number
+    scoreHumanas: number
+    scoreLinguagens: number
+    scoreMatematica: number
+    totalNatureza: number
+    totalHumanas: number
+    totalLinguagens: number
+    totalMatematica: number
+    updatedAt: Date
+    _count: UserStatisticsCountAggregateOutputType | null
+    _avg: UserStatisticsAvgAggregateOutputType | null
+    _sum: UserStatisticsSumAggregateOutputType | null
+    _min: UserStatisticsMinAggregateOutputType | null
+    _max: UserStatisticsMaxAggregateOutputType | null
+  }
+
+  type GetUserStatisticsGroupByPayload<T extends UserStatisticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserStatisticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserStatisticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserStatisticsGroupByOutputType[P]>
+            : GetScalarType<T[P], UserStatisticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserStatisticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalSimulados?: boolean
+    questionsDone?: boolean
+    questionsRight?: boolean
+    questionsWrong?: boolean
+    scoreNatureza?: boolean
+    scoreHumanas?: boolean
+    scoreLinguagens?: boolean
+    scoreMatematica?: boolean
+    totalNatureza?: boolean
+    totalHumanas?: boolean
+    totalLinguagens?: boolean
+    totalMatematica?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStatistics"]>
+
+  export type UserStatisticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalSimulados?: boolean
+    questionsDone?: boolean
+    questionsRight?: boolean
+    questionsWrong?: boolean
+    scoreNatureza?: boolean
+    scoreHumanas?: boolean
+    scoreLinguagens?: boolean
+    scoreMatematica?: boolean
+    totalNatureza?: boolean
+    totalHumanas?: boolean
+    totalLinguagens?: boolean
+    totalMatematica?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStatistics"]>
+
+  export type UserStatisticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalSimulados?: boolean
+    questionsDone?: boolean
+    questionsRight?: boolean
+    questionsWrong?: boolean
+    scoreNatureza?: boolean
+    scoreHumanas?: boolean
+    scoreLinguagens?: boolean
+    scoreMatematica?: boolean
+    totalNatureza?: boolean
+    totalHumanas?: boolean
+    totalLinguagens?: boolean
+    totalMatematica?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStatistics"]>
+
+  export type UserStatisticsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalSimulados?: boolean
+    questionsDone?: boolean
+    questionsRight?: boolean
+    questionsWrong?: boolean
+    scoreNatureza?: boolean
+    scoreHumanas?: boolean
+    scoreLinguagens?: boolean
+    scoreMatematica?: boolean
+    totalNatureza?: boolean
+    totalHumanas?: boolean
+    totalLinguagens?: boolean
+    totalMatematica?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserStatisticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalSimulados" | "questionsDone" | "questionsRight" | "questionsWrong" | "scoreNatureza" | "scoreHumanas" | "scoreLinguagens" | "scoreMatematica" | "totalNatureza" | "totalHumanas" | "totalLinguagens" | "totalMatematica" | "updatedAt", ExtArgs["result"]["userStatistics"]>
+  export type UserStatisticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserStatisticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserStatisticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserStatisticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserStatistics"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: number
+      totalSimulados: number
+      questionsDone: number
+      questionsRight: number
+      questionsWrong: number
+      scoreNatureza: number
+      scoreHumanas: number
+      scoreLinguagens: number
+      scoreMatematica: number
+      totalNatureza: number
+      totalHumanas: number
+      totalLinguagens: number
+      totalMatematica: number
+      updatedAt: Date
+    }, ExtArgs["result"]["userStatistics"]>
+    composites: {}
+  }
+
+  type UserStatisticsGetPayload<S extends boolean | null | undefined | UserStatisticsDefaultArgs> = $Result.GetResult<Prisma.$UserStatisticsPayload, S>
+
+  type UserStatisticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserStatisticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserStatisticsCountAggregateInputType | true
+    }
+
+  export interface UserStatisticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserStatistics'], meta: { name: 'UserStatistics' } }
+    /**
+     * Find zero or one UserStatistics that matches the filter.
+     * @param {UserStatisticsFindUniqueArgs} args - Arguments to find a UserStatistics
+     * @example
+     * // Get one UserStatistics
+     * const userStatistics = await prisma.userStatistics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserStatisticsFindUniqueArgs>(args: SelectSubset<T, UserStatisticsFindUniqueArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserStatistics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserStatisticsFindUniqueOrThrowArgs} args - Arguments to find a UserStatistics
+     * @example
+     * // Get one UserStatistics
+     * const userStatistics = await prisma.userStatistics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserStatisticsFindUniqueOrThrowArgs>(args: SelectSubset<T, UserStatisticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserStatistics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsFindFirstArgs} args - Arguments to find a UserStatistics
+     * @example
+     * // Get one UserStatistics
+     * const userStatistics = await prisma.userStatistics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserStatisticsFindFirstArgs>(args?: SelectSubset<T, UserStatisticsFindFirstArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserStatistics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsFindFirstOrThrowArgs} args - Arguments to find a UserStatistics
+     * @example
+     * // Get one UserStatistics
+     * const userStatistics = await prisma.userStatistics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserStatisticsFindFirstOrThrowArgs>(args?: SelectSubset<T, UserStatisticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserStatistics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserStatistics
+     * const userStatistics = await prisma.userStatistics.findMany()
+     * 
+     * // Get first 10 UserStatistics
+     * const userStatistics = await prisma.userStatistics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userStatisticsWithIdOnly = await prisma.userStatistics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserStatisticsFindManyArgs>(args?: SelectSubset<T, UserStatisticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserStatistics.
+     * @param {UserStatisticsCreateArgs} args - Arguments to create a UserStatistics.
+     * @example
+     * // Create one UserStatistics
+     * const UserStatistics = await prisma.userStatistics.create({
+     *   data: {
+     *     // ... data to create a UserStatistics
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserStatisticsCreateArgs>(args: SelectSubset<T, UserStatisticsCreateArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserStatistics.
+     * @param {UserStatisticsCreateManyArgs} args - Arguments to create many UserStatistics.
+     * @example
+     * // Create many UserStatistics
+     * const userStatistics = await prisma.userStatistics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserStatisticsCreateManyArgs>(args?: SelectSubset<T, UserStatisticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserStatistics and returns the data saved in the database.
+     * @param {UserStatisticsCreateManyAndReturnArgs} args - Arguments to create many UserStatistics.
+     * @example
+     * // Create many UserStatistics
+     * const userStatistics = await prisma.userStatistics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserStatistics and only return the `id`
+     * const userStatisticsWithIdOnly = await prisma.userStatistics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserStatisticsCreateManyAndReturnArgs>(args?: SelectSubset<T, UserStatisticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserStatistics.
+     * @param {UserStatisticsDeleteArgs} args - Arguments to delete one UserStatistics.
+     * @example
+     * // Delete one UserStatistics
+     * const UserStatistics = await prisma.userStatistics.delete({
+     *   where: {
+     *     // ... filter to delete one UserStatistics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserStatisticsDeleteArgs>(args: SelectSubset<T, UserStatisticsDeleteArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserStatistics.
+     * @param {UserStatisticsUpdateArgs} args - Arguments to update one UserStatistics.
+     * @example
+     * // Update one UserStatistics
+     * const userStatistics = await prisma.userStatistics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserStatisticsUpdateArgs>(args: SelectSubset<T, UserStatisticsUpdateArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserStatistics.
+     * @param {UserStatisticsDeleteManyArgs} args - Arguments to filter UserStatistics to delete.
+     * @example
+     * // Delete a few UserStatistics
+     * const { count } = await prisma.userStatistics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserStatisticsDeleteManyArgs>(args?: SelectSubset<T, UserStatisticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserStatistics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserStatistics
+     * const userStatistics = await prisma.userStatistics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserStatisticsUpdateManyArgs>(args: SelectSubset<T, UserStatisticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserStatistics and returns the data updated in the database.
+     * @param {UserStatisticsUpdateManyAndReturnArgs} args - Arguments to update many UserStatistics.
+     * @example
+     * // Update many UserStatistics
+     * const userStatistics = await prisma.userStatistics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserStatistics and only return the `id`
+     * const userStatisticsWithIdOnly = await prisma.userStatistics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserStatisticsUpdateManyAndReturnArgs>(args: SelectSubset<T, UserStatisticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserStatistics.
+     * @param {UserStatisticsUpsertArgs} args - Arguments to update or create a UserStatistics.
+     * @example
+     * // Update or create a UserStatistics
+     * const userStatistics = await prisma.userStatistics.upsert({
+     *   create: {
+     *     // ... data to create a UserStatistics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserStatistics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserStatisticsUpsertArgs>(args: SelectSubset<T, UserStatisticsUpsertArgs<ExtArgs>>): Prisma__UserStatisticsClient<$Result.GetResult<Prisma.$UserStatisticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserStatistics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsCountArgs} args - Arguments to filter UserStatistics to count.
+     * @example
+     * // Count the number of UserStatistics
+     * const count = await prisma.userStatistics.count({
+     *   where: {
+     *     // ... the filter for the UserStatistics we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserStatisticsCountArgs>(
+      args?: Subset<T, UserStatisticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserStatisticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserStatistics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserStatisticsAggregateArgs>(args: Subset<T, UserStatisticsAggregateArgs>): Prisma.PrismaPromise<GetUserStatisticsAggregateType<T>>
+
+    /**
+     * Group by UserStatistics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatisticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserStatisticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserStatisticsGroupByArgs['orderBy'] }
+        : { orderBy?: UserStatisticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserStatisticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserStatisticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserStatistics model
+   */
+  readonly fields: UserStatisticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserStatistics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserStatisticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserStatistics model
+   */
+  interface UserStatisticsFieldRefs {
+    readonly id: FieldRef<"UserStatistics", 'Int'>
+    readonly userId: FieldRef<"UserStatistics", 'Int'>
+    readonly totalSimulados: FieldRef<"UserStatistics", 'Int'>
+    readonly questionsDone: FieldRef<"UserStatistics", 'Int'>
+    readonly questionsRight: FieldRef<"UserStatistics", 'Int'>
+    readonly questionsWrong: FieldRef<"UserStatistics", 'Int'>
+    readonly scoreNatureza: FieldRef<"UserStatistics", 'Int'>
+    readonly scoreHumanas: FieldRef<"UserStatistics", 'Int'>
+    readonly scoreLinguagens: FieldRef<"UserStatistics", 'Int'>
+    readonly scoreMatematica: FieldRef<"UserStatistics", 'Int'>
+    readonly totalNatureza: FieldRef<"UserStatistics", 'Int'>
+    readonly totalHumanas: FieldRef<"UserStatistics", 'Int'>
+    readonly totalLinguagens: FieldRef<"UserStatistics", 'Int'>
+    readonly totalMatematica: FieldRef<"UserStatistics", 'Int'>
+    readonly updatedAt: FieldRef<"UserStatistics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserStatistics findUnique
+   */
+  export type UserStatisticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatistics to fetch.
+     */
+    where: UserStatisticsWhereUniqueInput
+  }
+
+  /**
+   * UserStatistics findUniqueOrThrow
+   */
+  export type UserStatisticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatistics to fetch.
+     */
+    where: UserStatisticsWhereUniqueInput
+  }
+
+  /**
+   * UserStatistics findFirst
+   */
+  export type UserStatisticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatistics to fetch.
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatistics to fetch.
+     */
+    orderBy?: UserStatisticsOrderByWithRelationInput | UserStatisticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserStatistics.
+     */
+    cursor?: UserStatisticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatistics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatistics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserStatistics.
+     */
+    distinct?: UserStatisticsScalarFieldEnum | UserStatisticsScalarFieldEnum[]
+  }
+
+  /**
+   * UserStatistics findFirstOrThrow
+   */
+  export type UserStatisticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatistics to fetch.
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatistics to fetch.
+     */
+    orderBy?: UserStatisticsOrderByWithRelationInput | UserStatisticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserStatistics.
+     */
+    cursor?: UserStatisticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatistics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatistics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserStatistics.
+     */
+    distinct?: UserStatisticsScalarFieldEnum | UserStatisticsScalarFieldEnum[]
+  }
+
+  /**
+   * UserStatistics findMany
+   */
+  export type UserStatisticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatistics to fetch.
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatistics to fetch.
+     */
+    orderBy?: UserStatisticsOrderByWithRelationInput | UserStatisticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserStatistics.
+     */
+    cursor?: UserStatisticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatistics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatistics.
+     */
+    skip?: number
+    distinct?: UserStatisticsScalarFieldEnum | UserStatisticsScalarFieldEnum[]
+  }
+
+  /**
+   * UserStatistics create
+   */
+  export type UserStatisticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserStatistics.
+     */
+    data: XOR<UserStatisticsCreateInput, UserStatisticsUncheckedCreateInput>
+  }
+
+  /**
+   * UserStatistics createMany
+   */
+  export type UserStatisticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserStatistics.
+     */
+    data: UserStatisticsCreateManyInput | UserStatisticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserStatistics createManyAndReturn
+   */
+  export type UserStatisticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserStatistics.
+     */
+    data: UserStatisticsCreateManyInput | UserStatisticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserStatistics update
+   */
+  export type UserStatisticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserStatistics.
+     */
+    data: XOR<UserStatisticsUpdateInput, UserStatisticsUncheckedUpdateInput>
+    /**
+     * Choose, which UserStatistics to update.
+     */
+    where: UserStatisticsWhereUniqueInput
+  }
+
+  /**
+   * UserStatistics updateMany
+   */
+  export type UserStatisticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserStatistics.
+     */
+    data: XOR<UserStatisticsUpdateManyMutationInput, UserStatisticsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserStatistics to update
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * Limit how many UserStatistics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserStatistics updateManyAndReturn
+   */
+  export type UserStatisticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * The data used to update UserStatistics.
+     */
+    data: XOR<UserStatisticsUpdateManyMutationInput, UserStatisticsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserStatistics to update
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * Limit how many UserStatistics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserStatistics upsert
+   */
+  export type UserStatisticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserStatistics to update in case it exists.
+     */
+    where: UserStatisticsWhereUniqueInput
+    /**
+     * In case the UserStatistics found by the `where` argument doesn't exist, create a new UserStatistics with this data.
+     */
+    create: XOR<UserStatisticsCreateInput, UserStatisticsUncheckedCreateInput>
+    /**
+     * In case the UserStatistics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserStatisticsUpdateInput, UserStatisticsUncheckedUpdateInput>
+  }
+
+  /**
+   * UserStatistics delete
+   */
+  export type UserStatisticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+    /**
+     * Filter which UserStatistics to delete.
+     */
+    where: UserStatisticsWhereUniqueInput
+  }
+
+  /**
+   * UserStatistics deleteMany
+   */
+  export type UserStatisticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserStatistics to delete
+     */
+    where?: UserStatisticsWhereInput
+    /**
+     * Limit how many UserStatistics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserStatistics without action
+   */
+  export type UserStatisticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatistics
+     */
+    select?: UserStatisticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatistics
+     */
+    omit?: UserStatisticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatisticsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7254,6 +8669,7 @@ export namespace Prisma {
     testId: 'testId',
     questionId: 'questionId',
     questionYear: 'questionYear',
+    discipline: 'discipline',
     selectedOption: 'selectedOption',
     isCorrect: 'isCorrect',
     createdAt: 'createdAt',
@@ -7261,6 +8677,27 @@ export namespace Prisma {
   };
 
   export type QuestionAnswerScalarFieldEnum = (typeof QuestionAnswerScalarFieldEnum)[keyof typeof QuestionAnswerScalarFieldEnum]
+
+
+  export const UserStatisticsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalSimulados: 'totalSimulados',
+    questionsDone: 'questionsDone',
+    questionsRight: 'questionsRight',
+    questionsWrong: 'questionsWrong',
+    scoreNatureza: 'scoreNatureza',
+    scoreHumanas: 'scoreHumanas',
+    scoreLinguagens: 'scoreLinguagens',
+    scoreMatematica: 'scoreMatematica',
+    totalNatureza: 'totalNatureza',
+    totalHumanas: 'totalHumanas',
+    totalLinguagens: 'totalLinguagens',
+    totalMatematica: 'totalMatematica',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserStatisticsScalarFieldEnum = (typeof UserStatisticsScalarFieldEnum)[keyof typeof UserStatisticsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7372,6 +8809,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     tests?: TestListRelationFilter
     questionAnswers?: QuestionAnswerListRelationFilter
+    userStatistics?: UserStatisticsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7385,6 +8823,7 @@ export namespace Prisma {
     comments?: CommentOrderByRelationAggregateInput
     tests?: TestOrderByRelationAggregateInput
     questionAnswers?: questionAnswerOrderByRelationAggregateInput
+    userStatistics?: UserStatisticsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7401,6 +8840,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     tests?: TestListRelationFilter
     questionAnswers?: QuestionAnswerListRelationFilter
+    userStatistics?: UserStatisticsListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -7658,6 +9098,7 @@ export namespace Prisma {
     testId?: IntNullableFilter<"questionAnswer"> | number | null
     questionId?: StringFilter<"questionAnswer"> | string
     questionYear?: IntNullableFilter<"questionAnswer"> | number | null
+    discipline?: StringFilter<"questionAnswer"> | string
     selectedOption?: StringFilter<"questionAnswer"> | string
     isCorrect?: BoolFilter<"questionAnswer"> | boolean
     createdAt?: DateTimeFilter<"questionAnswer"> | Date | string
@@ -7672,6 +9113,7 @@ export namespace Prisma {
     testId?: SortOrderInput | SortOrder
     questionId?: SortOrder
     questionYear?: SortOrderInput | SortOrder
+    discipline?: SortOrder
     selectedOption?: SortOrder
     isCorrect?: SortOrder
     createdAt?: SortOrder
@@ -7690,6 +9132,7 @@ export namespace Prisma {
     testId?: IntNullableFilter<"questionAnswer"> | number | null
     questionId?: StringFilter<"questionAnswer"> | string
     questionYear?: IntNullableFilter<"questionAnswer"> | number | null
+    discipline?: StringFilter<"questionAnswer"> | string
     selectedOption?: StringFilter<"questionAnswer"> | string
     isCorrect?: BoolFilter<"questionAnswer"> | boolean
     createdAt?: DateTimeFilter<"questionAnswer"> | Date | string
@@ -7704,6 +9147,7 @@ export namespace Prisma {
     testId?: SortOrderInput | SortOrder
     questionId?: SortOrder
     questionYear?: SortOrderInput | SortOrder
+    discipline?: SortOrder
     selectedOption?: SortOrder
     isCorrect?: SortOrder
     createdAt?: SortOrder
@@ -7724,10 +9168,118 @@ export namespace Prisma {
     testId?: IntNullableWithAggregatesFilter<"questionAnswer"> | number | null
     questionId?: StringWithAggregatesFilter<"questionAnswer"> | string
     questionYear?: IntNullableWithAggregatesFilter<"questionAnswer"> | number | null
+    discipline?: StringWithAggregatesFilter<"questionAnswer"> | string
     selectedOption?: StringWithAggregatesFilter<"questionAnswer"> | string
     isCorrect?: BoolWithAggregatesFilter<"questionAnswer"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"questionAnswer"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"questionAnswer"> | Date | string
+  }
+
+  export type UserStatisticsWhereInput = {
+    AND?: UserStatisticsWhereInput | UserStatisticsWhereInput[]
+    OR?: UserStatisticsWhereInput[]
+    NOT?: UserStatisticsWhereInput | UserStatisticsWhereInput[]
+    id?: IntFilter<"UserStatistics"> | number
+    userId?: IntFilter<"UserStatistics"> | number
+    totalSimulados?: IntFilter<"UserStatistics"> | number
+    questionsDone?: IntFilter<"UserStatistics"> | number
+    questionsRight?: IntFilter<"UserStatistics"> | number
+    questionsWrong?: IntFilter<"UserStatistics"> | number
+    scoreNatureza?: IntFilter<"UserStatistics"> | number
+    scoreHumanas?: IntFilter<"UserStatistics"> | number
+    scoreLinguagens?: IntFilter<"UserStatistics"> | number
+    scoreMatematica?: IntFilter<"UserStatistics"> | number
+    totalNatureza?: IntFilter<"UserStatistics"> | number
+    totalHumanas?: IntFilter<"UserStatistics"> | number
+    totalLinguagens?: IntFilter<"UserStatistics"> | number
+    totalMatematica?: IntFilter<"UserStatistics"> | number
+    updatedAt?: DateTimeFilter<"UserStatistics"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserStatisticsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserStatisticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId?: number
+    AND?: UserStatisticsWhereInput | UserStatisticsWhereInput[]
+    OR?: UserStatisticsWhereInput[]
+    NOT?: UserStatisticsWhereInput | UserStatisticsWhereInput[]
+    totalSimulados?: IntFilter<"UserStatistics"> | number
+    questionsDone?: IntFilter<"UserStatistics"> | number
+    questionsRight?: IntFilter<"UserStatistics"> | number
+    questionsWrong?: IntFilter<"UserStatistics"> | number
+    scoreNatureza?: IntFilter<"UserStatistics"> | number
+    scoreHumanas?: IntFilter<"UserStatistics"> | number
+    scoreLinguagens?: IntFilter<"UserStatistics"> | number
+    scoreMatematica?: IntFilter<"UserStatistics"> | number
+    totalNatureza?: IntFilter<"UserStatistics"> | number
+    totalHumanas?: IntFilter<"UserStatistics"> | number
+    totalLinguagens?: IntFilter<"UserStatistics"> | number
+    totalMatematica?: IntFilter<"UserStatistics"> | number
+    updatedAt?: DateTimeFilter<"UserStatistics"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type UserStatisticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserStatisticsCountOrderByAggregateInput
+    _avg?: UserStatisticsAvgOrderByAggregateInput
+    _max?: UserStatisticsMaxOrderByAggregateInput
+    _min?: UserStatisticsMinOrderByAggregateInput
+    _sum?: UserStatisticsSumOrderByAggregateInput
+  }
+
+  export type UserStatisticsScalarWhereWithAggregatesInput = {
+    AND?: UserStatisticsScalarWhereWithAggregatesInput | UserStatisticsScalarWhereWithAggregatesInput[]
+    OR?: UserStatisticsScalarWhereWithAggregatesInput[]
+    NOT?: UserStatisticsScalarWhereWithAggregatesInput | UserStatisticsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserStatistics"> | number
+    userId?: IntWithAggregatesFilter<"UserStatistics"> | number
+    totalSimulados?: IntWithAggregatesFilter<"UserStatistics"> | number
+    questionsDone?: IntWithAggregatesFilter<"UserStatistics"> | number
+    questionsRight?: IntWithAggregatesFilter<"UserStatistics"> | number
+    questionsWrong?: IntWithAggregatesFilter<"UserStatistics"> | number
+    scoreNatureza?: IntWithAggregatesFilter<"UserStatistics"> | number
+    scoreHumanas?: IntWithAggregatesFilter<"UserStatistics"> | number
+    scoreLinguagens?: IntWithAggregatesFilter<"UserStatistics"> | number
+    scoreMatematica?: IntWithAggregatesFilter<"UserStatistics"> | number
+    totalNatureza?: IntWithAggregatesFilter<"UserStatistics"> | number
+    totalHumanas?: IntWithAggregatesFilter<"UserStatistics"> | number
+    totalLinguagens?: IntWithAggregatesFilter<"UserStatistics"> | number
+    totalMatematica?: IntWithAggregatesFilter<"UserStatistics"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"UserStatistics"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -7740,6 +9292,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     tests?: TestCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7753,6 +9306,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     tests?: TestUncheckedCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerUncheckedCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7765,6 +9319,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     tests?: TestUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7778,6 +9333,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     tests?: TestUncheckedUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUncheckedUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -8029,6 +9585,7 @@ export namespace Prisma {
     id?: string
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -8043,6 +9600,7 @@ export namespace Prisma {
     testId?: number | null
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -8053,6 +9611,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8067,6 +9626,7 @@ export namespace Prisma {
     testId?: NullableIntFieldUpdateOperationsInput | number | null
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8079,6 +9639,7 @@ export namespace Prisma {
     testId?: number | null
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -8089,6 +9650,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8101,9 +9663,132 @@ export namespace Prisma {
     testId?: NullableIntFieldUpdateOperationsInput | number | null
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatisticsCreateInput = {
+    totalSimulados?: number
+    questionsDone?: number
+    questionsRight?: number
+    questionsWrong?: number
+    scoreNatureza?: number
+    scoreHumanas?: number
+    scoreLinguagens?: number
+    scoreMatematica?: number
+    totalNatureza?: number
+    totalHumanas?: number
+    totalLinguagens?: number
+    totalMatematica?: number
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUserStatisticsInput
+  }
+
+  export type UserStatisticsUncheckedCreateInput = {
+    id?: number
+    userId: number
+    totalSimulados?: number
+    questionsDone?: number
+    questionsRight?: number
+    questionsWrong?: number
+    scoreNatureza?: number
+    scoreHumanas?: number
+    scoreLinguagens?: number
+    scoreMatematica?: number
+    totalNatureza?: number
+    totalHumanas?: number
+    totalLinguagens?: number
+    totalMatematica?: number
+    updatedAt?: Date | string
+  }
+
+  export type UserStatisticsUpdateInput = {
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserStatisticsNestedInput
+  }
+
+  export type UserStatisticsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatisticsCreateManyInput = {
+    id?: number
+    userId: number
+    totalSimulados?: number
+    questionsDone?: number
+    questionsRight?: number
+    questionsWrong?: number
+    scoreNatureza?: number
+    scoreHumanas?: number
+    scoreLinguagens?: number
+    scoreMatematica?: number
+    totalNatureza?: number
+    totalHumanas?: number
+    totalLinguagens?: number
+    totalMatematica?: number
+    updatedAt?: Date | string
+  }
+
+  export type UserStatisticsUpdateManyMutationInput = {
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatisticsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8168,6 +9853,12 @@ export namespace Prisma {
     none?: questionAnswerWhereInput
   }
 
+  export type UserStatisticsListRelationFilter = {
+    every?: UserStatisticsWhereInput
+    some?: UserStatisticsWhereInput
+    none?: UserStatisticsWhereInput
+  }
+
   export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -8181,6 +9872,10 @@ export namespace Prisma {
   }
 
   export type questionAnswerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserStatisticsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8487,6 +10182,7 @@ export namespace Prisma {
     testId?: SortOrder
     questionId?: SortOrder
     questionYear?: SortOrder
+    discipline?: SortOrder
     selectedOption?: SortOrder
     isCorrect?: SortOrder
     createdAt?: SortOrder
@@ -8505,6 +10201,7 @@ export namespace Prisma {
     testId?: SortOrder
     questionId?: SortOrder
     questionYear?: SortOrder
+    discipline?: SortOrder
     selectedOption?: SortOrder
     isCorrect?: SortOrder
     createdAt?: SortOrder
@@ -8517,6 +10214,7 @@ export namespace Prisma {
     testId?: SortOrder
     questionId?: SortOrder
     questionYear?: SortOrder
+    discipline?: SortOrder
     selectedOption?: SortOrder
     isCorrect?: SortOrder
     createdAt?: SortOrder
@@ -8543,6 +10241,94 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type UserStatisticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserStatisticsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
+  }
+
+  export type UserStatisticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserStatisticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserStatisticsSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalSimulados?: SortOrder
+    questionsDone?: SortOrder
+    questionsRight?: SortOrder
+    questionsWrong?: SortOrder
+    scoreNatureza?: SortOrder
+    scoreHumanas?: SortOrder
+    scoreLinguagens?: SortOrder
+    scoreMatematica?: SortOrder
+    totalNatureza?: SortOrder
+    totalHumanas?: SortOrder
+    totalLinguagens?: SortOrder
+    totalMatematica?: SortOrder
   }
 
   export type PostCreateNestedManyWithoutAuthorInput = {
@@ -8573,6 +10359,13 @@ export namespace Prisma {
     connect?: questionAnswerWhereUniqueInput | questionAnswerWhereUniqueInput[]
   }
 
+  export type UserStatisticsCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserStatisticsCreateWithoutUserInput, UserStatisticsUncheckedCreateWithoutUserInput> | UserStatisticsCreateWithoutUserInput[] | UserStatisticsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserStatisticsCreateOrConnectWithoutUserInput | UserStatisticsCreateOrConnectWithoutUserInput[]
+    createMany?: UserStatisticsCreateManyUserInputEnvelope
+    connect?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+  }
+
   export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
@@ -8599,6 +10392,13 @@ export namespace Prisma {
     connectOrCreate?: questionAnswerCreateOrConnectWithoutAuthorInput | questionAnswerCreateOrConnectWithoutAuthorInput[]
     createMany?: questionAnswerCreateManyAuthorInputEnvelope
     connect?: questionAnswerWhereUniqueInput | questionAnswerWhereUniqueInput[]
+  }
+
+  export type UserStatisticsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserStatisticsCreateWithoutUserInput, UserStatisticsUncheckedCreateWithoutUserInput> | UserStatisticsCreateWithoutUserInput[] | UserStatisticsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserStatisticsCreateOrConnectWithoutUserInput | UserStatisticsCreateOrConnectWithoutUserInput[]
+    createMany?: UserStatisticsCreateManyUserInputEnvelope
+    connect?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8665,6 +10465,20 @@ export namespace Prisma {
     deleteMany?: questionAnswerScalarWhereInput | questionAnswerScalarWhereInput[]
   }
 
+  export type UserStatisticsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserStatisticsCreateWithoutUserInput, UserStatisticsUncheckedCreateWithoutUserInput> | UserStatisticsCreateWithoutUserInput[] | UserStatisticsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserStatisticsCreateOrConnectWithoutUserInput | UserStatisticsCreateOrConnectWithoutUserInput[]
+    upsert?: UserStatisticsUpsertWithWhereUniqueWithoutUserInput | UserStatisticsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserStatisticsCreateManyUserInputEnvelope
+    set?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    disconnect?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    delete?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    connect?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    update?: UserStatisticsUpdateWithWhereUniqueWithoutUserInput | UserStatisticsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserStatisticsUpdateManyWithWhereWithoutUserInput | UserStatisticsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserStatisticsScalarWhereInput | UserStatisticsScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -8727,6 +10541,20 @@ export namespace Prisma {
     update?: questionAnswerUpdateWithWhereUniqueWithoutAuthorInput | questionAnswerUpdateWithWhereUniqueWithoutAuthorInput[]
     updateMany?: questionAnswerUpdateManyWithWhereWithoutAuthorInput | questionAnswerUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: questionAnswerScalarWhereInput | questionAnswerScalarWhereInput[]
+  }
+
+  export type UserStatisticsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserStatisticsCreateWithoutUserInput, UserStatisticsUncheckedCreateWithoutUserInput> | UserStatisticsCreateWithoutUserInput[] | UserStatisticsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserStatisticsCreateOrConnectWithoutUserInput | UserStatisticsCreateOrConnectWithoutUserInput[]
+    upsert?: UserStatisticsUpsertWithWhereUniqueWithoutUserInput | UserStatisticsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserStatisticsCreateManyUserInputEnvelope
+    set?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    disconnect?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    delete?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    connect?: UserStatisticsWhereUniqueInput | UserStatisticsWhereUniqueInput[]
+    update?: UserStatisticsUpdateWithWhereUniqueWithoutUserInput | UserStatisticsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserStatisticsUpdateManyWithWhereWithoutUserInput | UserStatisticsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserStatisticsScalarWhereInput | UserStatisticsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -8913,6 +10741,20 @@ export namespace Prisma {
     delete?: TestWhereInput | boolean
     connect?: TestWhereUniqueInput
     update?: XOR<XOR<TestUpdateToOneWithWhereWithoutAnswersInput, TestUpdateWithoutAnswersInput>, TestUncheckedUpdateWithoutAnswersInput>
+  }
+
+  export type UserCreateNestedOneWithoutUserStatisticsInput = {
+    create?: XOR<UserCreateWithoutUserStatisticsInput, UserUncheckedCreateWithoutUserStatisticsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserStatisticsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUserStatisticsNestedInput = {
+    create?: XOR<UserCreateWithoutUserStatisticsInput, UserUncheckedCreateWithoutUserStatisticsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserStatisticsInput
+    upsert?: UserUpsertWithoutUserStatisticsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserStatisticsInput, UserUpdateWithoutUserStatisticsInput>, UserUncheckedUpdateWithoutUserStatisticsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -9184,6 +11026,7 @@ export namespace Prisma {
     id?: string
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -9196,6 +11039,7 @@ export namespace Prisma {
     testId?: number | null
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -9209,6 +11053,49 @@ export namespace Prisma {
 
   export type questionAnswerCreateManyAuthorInputEnvelope = {
     data: questionAnswerCreateManyAuthorInput | questionAnswerCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserStatisticsCreateWithoutUserInput = {
+    totalSimulados?: number
+    questionsDone?: number
+    questionsRight?: number
+    questionsWrong?: number
+    scoreNatureza?: number
+    scoreHumanas?: number
+    scoreLinguagens?: number
+    scoreMatematica?: number
+    totalNatureza?: number
+    totalHumanas?: number
+    totalLinguagens?: number
+    totalMatematica?: number
+    updatedAt?: Date | string
+  }
+
+  export type UserStatisticsUncheckedCreateWithoutUserInput = {
+    id?: number
+    totalSimulados?: number
+    questionsDone?: number
+    questionsRight?: number
+    questionsWrong?: number
+    scoreNatureza?: number
+    scoreHumanas?: number
+    scoreLinguagens?: number
+    scoreMatematica?: number
+    totalNatureza?: number
+    totalHumanas?: number
+    totalLinguagens?: number
+    totalMatematica?: number
+    updatedAt?: Date | string
+  }
+
+  export type UserStatisticsCreateOrConnectWithoutUserInput = {
+    where: UserStatisticsWhereUniqueInput
+    create: XOR<UserStatisticsCreateWithoutUserInput, UserStatisticsUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserStatisticsCreateManyUserInputEnvelope = {
+    data: UserStatisticsCreateManyUserInput | UserStatisticsCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -9326,10 +11213,48 @@ export namespace Prisma {
     testId?: IntNullableFilter<"questionAnswer"> | number | null
     questionId?: StringFilter<"questionAnswer"> | string
     questionYear?: IntNullableFilter<"questionAnswer"> | number | null
+    discipline?: StringFilter<"questionAnswer"> | string
     selectedOption?: StringFilter<"questionAnswer"> | string
     isCorrect?: BoolFilter<"questionAnswer"> | boolean
     createdAt?: DateTimeFilter<"questionAnswer"> | Date | string
     updatedAt?: DateTimeFilter<"questionAnswer"> | Date | string
+  }
+
+  export type UserStatisticsUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserStatisticsWhereUniqueInput
+    update: XOR<UserStatisticsUpdateWithoutUserInput, UserStatisticsUncheckedUpdateWithoutUserInput>
+    create: XOR<UserStatisticsCreateWithoutUserInput, UserStatisticsUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserStatisticsUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserStatisticsWhereUniqueInput
+    data: XOR<UserStatisticsUpdateWithoutUserInput, UserStatisticsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserStatisticsUpdateManyWithWhereWithoutUserInput = {
+    where: UserStatisticsScalarWhereInput
+    data: XOR<UserStatisticsUpdateManyMutationInput, UserStatisticsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserStatisticsScalarWhereInput = {
+    AND?: UserStatisticsScalarWhereInput | UserStatisticsScalarWhereInput[]
+    OR?: UserStatisticsScalarWhereInput[]
+    NOT?: UserStatisticsScalarWhereInput | UserStatisticsScalarWhereInput[]
+    id?: IntFilter<"UserStatistics"> | number
+    userId?: IntFilter<"UserStatistics"> | number
+    totalSimulados?: IntFilter<"UserStatistics"> | number
+    questionsDone?: IntFilter<"UserStatistics"> | number
+    questionsRight?: IntFilter<"UserStatistics"> | number
+    questionsWrong?: IntFilter<"UserStatistics"> | number
+    scoreNatureza?: IntFilter<"UserStatistics"> | number
+    scoreHumanas?: IntFilter<"UserStatistics"> | number
+    scoreLinguagens?: IntFilter<"UserStatistics"> | number
+    scoreMatematica?: IntFilter<"UserStatistics"> | number
+    totalNatureza?: IntFilter<"UserStatistics"> | number
+    totalHumanas?: IntFilter<"UserStatistics"> | number
+    totalLinguagens?: IntFilter<"UserStatistics"> | number
+    totalMatematica?: IntFilter<"UserStatistics"> | number
+    updatedAt?: DateTimeFilter<"UserStatistics"> | Date | string
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -9341,6 +11266,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     tests?: TestCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -9353,6 +11279,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     tests?: TestUncheckedCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerUncheckedCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -9405,6 +11332,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     tests?: TestUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -9417,6 +11345,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     tests?: TestUncheckedUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUncheckedUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -9470,6 +11399,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     tests?: TestCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -9482,6 +11412,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     tests?: TestUncheckedCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerUncheckedCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -9541,6 +11472,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     tests?: TestUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -9553,6 +11485,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     tests?: TestUncheckedUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUncheckedUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutTestsInput = {
@@ -9564,6 +11497,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTestsInput = {
@@ -9576,6 +11510,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     questionAnswers?: questionAnswerUncheckedCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTestsInput = {
@@ -9587,6 +11522,7 @@ export namespace Prisma {
     id?: string
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -9599,6 +11535,7 @@ export namespace Prisma {
     authorId: number
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -9635,6 +11572,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTestsInput = {
@@ -9647,6 +11585,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     questionAnswers?: questionAnswerUncheckedUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type questionAnswerUpsertWithWhereUniqueWithoutTestInput = {
@@ -9674,6 +11613,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     tests?: TestCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQuestionAnswersInput = {
@@ -9686,6 +11626,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     tests?: TestUncheckedCreateNestedManyWithoutAuthorInput
+    userStatistics?: UserStatisticsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQuestionAnswersInput = {
@@ -9741,6 +11682,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     tests?: TestUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuestionAnswersInput = {
@@ -9753,6 +11695,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     tests?: TestUncheckedUpdateManyWithoutAuthorNestedInput
+    userStatistics?: UserStatisticsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TestUpsertWithoutAnswersInput = {
@@ -9789,6 +11732,72 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutUserStatisticsInput = {
+    email: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    tests?: TestCreateNestedManyWithoutAuthorInput
+    questionAnswers?: questionAnswerCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutUserStatisticsInput = {
+    id?: number
+    email: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    tests?: TestUncheckedCreateNestedManyWithoutAuthorInput
+    questionAnswers?: questionAnswerUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutUserStatisticsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserStatisticsInput, UserUncheckedCreateWithoutUserStatisticsInput>
+  }
+
+  export type UserUpsertWithoutUserStatisticsInput = {
+    update: XOR<UserUpdateWithoutUserStatisticsInput, UserUncheckedUpdateWithoutUserStatisticsInput>
+    create: XOR<UserCreateWithoutUserStatisticsInput, UserUncheckedCreateWithoutUserStatisticsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserStatisticsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserStatisticsInput, UserUncheckedUpdateWithoutUserStatisticsInput>
+  }
+
+  export type UserUpdateWithoutUserStatisticsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    tests?: TestUpdateManyWithoutAuthorNestedInput
+    questionAnswers?: questionAnswerUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserStatisticsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    tests?: TestUncheckedUpdateManyWithoutAuthorNestedInput
+    questionAnswers?: questionAnswerUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
   export type PostCreateManyAuthorInput = {
     id?: number
     title: string
@@ -9823,9 +11832,27 @@ export namespace Prisma {
     testId?: number | null
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserStatisticsCreateManyUserInput = {
+    id?: number
+    totalSimulados?: number
+    questionsDone?: number
+    questionsRight?: number
+    questionsWrong?: number
+    scoreNatureza?: number
+    scoreHumanas?: number
+    scoreLinguagens?: number
+    scoreMatematica?: number
+    totalNatureza?: number
+    totalHumanas?: number
+    totalLinguagens?: number
+    totalMatematica?: number
     updatedAt?: Date | string
   }
 
@@ -9921,6 +11948,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9933,6 +11961,7 @@ export namespace Prisma {
     testId?: NullableIntFieldUpdateOperationsInput | number | null
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9944,9 +11973,60 @@ export namespace Prisma {
     testId?: NullableIntFieldUpdateOperationsInput | number | null
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatisticsUpdateWithoutUserInput = {
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatisticsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatisticsUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    totalSimulados?: IntFieldUpdateOperationsInput | number
+    questionsDone?: IntFieldUpdateOperationsInput | number
+    questionsRight?: IntFieldUpdateOperationsInput | number
+    questionsWrong?: IntFieldUpdateOperationsInput | number
+    scoreNatureza?: IntFieldUpdateOperationsInput | number
+    scoreHumanas?: IntFieldUpdateOperationsInput | number
+    scoreLinguagens?: IntFieldUpdateOperationsInput | number
+    scoreMatematica?: IntFieldUpdateOperationsInput | number
+    totalNatureza?: IntFieldUpdateOperationsInput | number
+    totalHumanas?: IntFieldUpdateOperationsInput | number
+    totalLinguagens?: IntFieldUpdateOperationsInput | number
+    totalMatematica?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9986,6 +12066,7 @@ export namespace Prisma {
     authorId: number
     questionId: string
     questionYear?: number | null
+    discipline?: string
     selectedOption: string
     isCorrect: boolean
     createdAt?: Date | string
@@ -9996,6 +12077,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10008,6 +12090,7 @@ export namespace Prisma {
     authorId?: IntFieldUpdateOperationsInput | number
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10019,6 +12102,7 @@ export namespace Prisma {
     authorId?: IntFieldUpdateOperationsInput | number
     questionId?: StringFieldUpdateOperationsInput | string
     questionYear?: NullableIntFieldUpdateOperationsInput | number | null
+    discipline?: StringFieldUpdateOperationsInput | string
     selectedOption?: StringFieldUpdateOperationsInput | string
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

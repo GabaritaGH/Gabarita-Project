@@ -167,9 +167,28 @@ exports.Prisma.QuestionAnswerScalarFieldEnum = {
   testId: 'testId',
   questionId: 'questionId',
   questionYear: 'questionYear',
+  discipline: 'discipline',
   selectedOption: 'selectedOption',
   isCorrect: 'isCorrect',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserStatisticsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalSimulados: 'totalSimulados',
+  questionsDone: 'questionsDone',
+  questionsRight: 'questionsRight',
+  questionsWrong: 'questionsWrong',
+  scoreNatureza: 'scoreNatureza',
+  scoreHumanas: 'scoreHumanas',
+  scoreLinguagens: 'scoreLinguagens',
+  scoreMatematica: 'scoreMatematica',
+  totalNatureza: 'totalNatureza',
+  totalHumanas: 'totalHumanas',
+  totalLinguagens: 'totalLinguagens',
+  totalMatematica: 'totalMatematica',
   updatedAt: 'updatedAt'
 };
 
@@ -194,7 +213,8 @@ exports.Prisma.ModelName = {
   Post: 'Post',
   Comment: 'Comment',
   Test: 'Test',
-  questionAnswer: 'questionAnswer'
+  questionAnswer: 'questionAnswer',
+  UserStatistics: 'UserStatistics'
 };
 
 /**

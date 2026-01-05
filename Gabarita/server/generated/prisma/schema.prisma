@@ -20,6 +20,8 @@ model User {
 
   tests           Test[]
   questionAnswers questionAnswer[] // Relação inversa adicionada
+
+  userStatistics UserStatistics[]
 }
 
 model Post {
@@ -79,6 +81,7 @@ model questionAnswer {
   // Dados da Resposta
   questionId     String // ID da questão (vindo do JSON ou API externa)
   questionYear   Int? // Opcional, útil para filtros
+  discipline     String  @default("Geral")
   selectedOption String // A letra que ele marcou (ex: "A", "B")
   isCorrect      Boolean // Se acertou ou não
 
@@ -86,4 +89,30 @@ model questionAnswer {
   updatedAt DateTime @updatedAt
 
   @@unique([authorId, questionId])
+}
+
+model UserStatistics {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Totais Gerais
+  totalSimulados Int @default(0)
+  questionsDone  Int @default(0) // Total de questões respondidas
+  questionsRight Int @default(0) // Acertos
+  questionsWrong Int @default(0) // Erros
+
+  // Estatísticas por Área (Opcional, mas muito útil para gráficos)
+  scoreNatureza   Int @default(0) // Acertos em Natureza
+  scoreHumanas    Int @default(0) // Acertos em Humanas
+  scoreLinguagens Int @default(0) // Acertos em Linguagens
+  scoreMatematica Int @default(0) // Acertos em Matemática
+
+  // Total de questões feitas por área (para calcular % de acerto por matéria)
+  totalNatureza   Int @default(0)
+  totalHumanas    Int @default(0)
+  totalLinguagens Int @default(0)
+  totalMatematica Int @default(0)
+
+  updatedAt DateTime @updatedAt
 }

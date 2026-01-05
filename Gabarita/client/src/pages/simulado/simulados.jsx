@@ -75,21 +75,70 @@ const Simulados = () => {
   };
 
   // 3. FINALIZAR
-  const handleFinish = () => {
-    if (!window.confirm("Deseja finalizar o simulado agora?")) return;
 
-    let acertos = 0;
-    questions.forEach(q => {
-      const qId = q.id || q._id || q.index;
-      // Compara a resposta do usuário com o gabarito (correctAlternative)
-      if (userAnswers[qId] === q.correctAlternative) {
-        acertos++;
-      }
-    });
 
-    setScore(acertos);
-    setStage('result');
-  };
+  const handleFinish = async () => {
+  if (!window.confirm("Deseja finalizar o simulado agora?")) return;
+  
+  // 1. Calcular acertos e preparar array de respostas
+  let acertos = 0;
+  const answersPayload = []; // Array para enviar ao backend
+
+  questions.forEach(q => {
+    // Pega o ID correto (dependendo de como vem da API/JSON)
+    const qId = q.id || q._id || q.index;
+    
+    // Resposta do usuário (se não marcou nada, considere nulo ou string vazia)
+    const userAns = userAnswers[qId];
+    const isCorrect = userAns === q.correctAlternative;
+
+    if (isCorrect) acertos++;
+
+    // Só adiciona ao payload se o usuário tiver respondido (ou adicione como "errado" se quiser contar em branco)
+    if (userAns) {
+      answersPayload.push({
+        questionId: qId,
+        questionYear: q.year, // Importante enviar o ano se tiver
+        selectedOption: userAns,
+        isCorrect: isCorrect
+      });
+    }
+  });
+
+  // Atualiza estado visual imediatamente
+  setScore(acertos);
+  
+  // 2. Enviar para o Backend
+  const storedUserId = localStorage.getItem('userId');
+  
+  if (testId && storedUserId) {
+    setIsLoading(true); // Reutilizando estado de loading ou crie um isSaving
+    try {
+      const response = await fetch(`${API_URL}/tests/finish`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: storedUserId,
+          testId: testId,
+          answers: answersPayload
+        })
+      });
+
+      if (!response.ok) throw new Error("Falha ao salvar estatísticas");
+      
+      console.log("Simulado salvo com sucesso!");
+
+    } catch (error) {
+      console.error(error);
+      alert("Seu resultado foi calculado, mas houve um erro ao salvar no histórico.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // 3. Mudar para tela de resultado
+  setStage('result');
+};
 
   // --- HELPER: Renderiza texto limpo e parágrafos ---
   const renderTextBody = (text) => {
