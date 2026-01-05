@@ -4831,11 +4831,15 @@ export namespace Prisma {
   export type TestAvgAggregateOutputType = {
     id: number | null
     authorId: number | null
+    totalQuestions: number | null
+    score: number | null
   }
 
   export type TestSumAggregateOutputType = {
     id: number | null
     authorId: number | null
+    totalQuestions: number | null
+    score: number | null
   }
 
   export type TestMinAggregateOutputType = {
@@ -4843,6 +4847,9 @@ export namespace Prisma {
     title: string | null
     area: string | null
     authorId: number | null
+    totalQuestions: number | null
+    score: number | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4852,6 +4859,9 @@ export namespace Prisma {
     title: string | null
     area: string | null
     authorId: number | null
+    totalQuestions: number | null
+    score: number | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4861,6 +4871,9 @@ export namespace Prisma {
     title: number
     area: number
     authorId: number
+    totalQuestions: number
+    score: number
+    status: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4870,11 +4883,15 @@ export namespace Prisma {
   export type TestAvgAggregateInputType = {
     id?: true
     authorId?: true
+    totalQuestions?: true
+    score?: true
   }
 
   export type TestSumAggregateInputType = {
     id?: true
     authorId?: true
+    totalQuestions?: true
+    score?: true
   }
 
   export type TestMinAggregateInputType = {
@@ -4882,6 +4899,9 @@ export namespace Prisma {
     title?: true
     area?: true
     authorId?: true
+    totalQuestions?: true
+    score?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4891,6 +4911,9 @@ export namespace Prisma {
     title?: true
     area?: true
     authorId?: true
+    totalQuestions?: true
+    score?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4900,6 +4923,9 @@ export namespace Prisma {
     title?: true
     area?: true
     authorId?: true
+    totalQuestions?: true
+    score?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4993,9 +5019,12 @@ export namespace Prisma {
 
   export type TestGroupByOutputType = {
     id: number
-    title: string
-    area: string | null
+    title: string | null
+    area: string
     authorId: number
+    totalQuestions: number
+    score: number
+    status: string
     createdAt: Date
     updatedAt: Date
     _count: TestCountAggregateOutputType | null
@@ -5024,6 +5053,9 @@ export namespace Prisma {
     title?: boolean
     area?: boolean
     authorId?: boolean
+    totalQuestions?: boolean
+    score?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -5036,6 +5068,9 @@ export namespace Prisma {
     title?: boolean
     area?: boolean
     authorId?: boolean
+    totalQuestions?: boolean
+    score?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -5046,6 +5081,9 @@ export namespace Prisma {
     title?: boolean
     area?: boolean
     authorId?: boolean
+    totalQuestions?: boolean
+    score?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -5056,11 +5094,14 @@ export namespace Prisma {
     title?: boolean
     area?: boolean
     authorId?: boolean
+    totalQuestions?: boolean
+    score?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "area" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["test"]>
+  export type TestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "area" | "authorId" | "totalQuestions" | "score" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["test"]>
   export type TestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     answers?: boolean | Test$answersArgs<ExtArgs>
@@ -5081,9 +5122,12 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      title: string
-      area: string | null
+      title: string | null
+      area: string
       authorId: number
+      totalQuestions: number
+      score: number
+      status: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["test"]>
@@ -5515,6 +5559,9 @@ export namespace Prisma {
     readonly title: FieldRef<"Test", 'String'>
     readonly area: FieldRef<"Test", 'String'>
     readonly authorId: FieldRef<"Test", 'Int'>
+    readonly totalQuestions: FieldRef<"Test", 'Int'>
+    readonly score: FieldRef<"Test", 'Int'>
+    readonly status: FieldRef<"Test", 'String'>
     readonly createdAt: FieldRef<"Test", 'DateTime'>
     readonly updatedAt: FieldRef<"Test", 'DateTime'>
   }
@@ -7191,6 +7238,9 @@ export namespace Prisma {
     title: 'title',
     area: 'area',
     authorId: 'authorId',
+    totalQuestions: 'totalQuestions',
+    score: 'score',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7524,9 +7574,12 @@ export namespace Prisma {
     OR?: TestWhereInput[]
     NOT?: TestWhereInput | TestWhereInput[]
     id?: IntFilter<"Test"> | number
-    title?: StringFilter<"Test"> | string
-    area?: StringNullableFilter<"Test"> | string | null
+    title?: StringNullableFilter<"Test"> | string | null
+    area?: StringFilter<"Test"> | string
     authorId?: IntFilter<"Test"> | number
+    totalQuestions?: IntFilter<"Test"> | number
+    score?: IntFilter<"Test"> | number
+    status?: StringFilter<"Test"> | string
     createdAt?: DateTimeFilter<"Test"> | Date | string
     updatedAt?: DateTimeFilter<"Test"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7535,9 +7588,12 @@ export namespace Prisma {
 
   export type TestOrderByWithRelationInput = {
     id?: SortOrder
-    title?: SortOrder
-    area?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    area?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     author?: UserOrderByWithRelationInput
@@ -7549,9 +7605,12 @@ export namespace Prisma {
     AND?: TestWhereInput | TestWhereInput[]
     OR?: TestWhereInput[]
     NOT?: TestWhereInput | TestWhereInput[]
-    title?: StringFilter<"Test"> | string
-    area?: StringNullableFilter<"Test"> | string | null
+    title?: StringNullableFilter<"Test"> | string | null
+    area?: StringFilter<"Test"> | string
     authorId?: IntFilter<"Test"> | number
+    totalQuestions?: IntFilter<"Test"> | number
+    score?: IntFilter<"Test"> | number
+    status?: StringFilter<"Test"> | string
     createdAt?: DateTimeFilter<"Test"> | Date | string
     updatedAt?: DateTimeFilter<"Test"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7560,9 +7619,12 @@ export namespace Prisma {
 
   export type TestOrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
-    area?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    area?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TestCountOrderByAggregateInput
@@ -7577,9 +7639,12 @@ export namespace Prisma {
     OR?: TestScalarWhereWithAggregatesInput[]
     NOT?: TestScalarWhereWithAggregatesInput | TestScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Test"> | number
-    title?: StringWithAggregatesFilter<"Test"> | string
-    area?: StringNullableWithAggregatesFilter<"Test"> | string | null
+    title?: StringNullableWithAggregatesFilter<"Test"> | string | null
+    area?: StringWithAggregatesFilter<"Test"> | string
     authorId?: IntWithAggregatesFilter<"Test"> | number
+    totalQuestions?: IntWithAggregatesFilter<"Test"> | number
+    score?: IntWithAggregatesFilter<"Test"> | number
+    status?: StringWithAggregatesFilter<"Test"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Test"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Test"> | Date | string
   }
@@ -7877,8 +7942,11 @@ export namespace Prisma {
   }
 
   export type TestCreateInput = {
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutTestsInput
@@ -7887,17 +7955,23 @@ export namespace Prisma {
 
   export type TestUncheckedCreateInput = {
     id?: number
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
     authorId: number
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     answers?: questionAnswerUncheckedCreateNestedManyWithoutTestInput
   }
 
   export type TestUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutTestsNestedInput
@@ -7906,9 +7980,12 @@ export namespace Prisma {
 
   export type TestUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
     authorId?: IntFieldUpdateOperationsInput | number
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: questionAnswerUncheckedUpdateManyWithoutTestNestedInput
@@ -7916,25 +7993,34 @@ export namespace Prisma {
 
   export type TestCreateManyInput = {
     id?: number
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
     authorId: number
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type TestUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
     authorId?: IntFieldUpdateOperationsInput | number
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8311,6 +8397,9 @@ export namespace Prisma {
     title?: SortOrder
     area?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8318,6 +8407,8 @@ export namespace Prisma {
   export type TestAvgOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
   }
 
   export type TestMaxOrderByAggregateInput = {
@@ -8325,6 +8416,9 @@ export namespace Prisma {
     title?: SortOrder
     area?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8334,6 +8428,9 @@ export namespace Prisma {
     title?: SortOrder
     area?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8341,6 +8438,8 @@ export namespace Prisma {
   export type TestSumOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    totalQuestions?: SortOrder
+    score?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9049,8 +9148,11 @@ export namespace Prisma {
   }
 
   export type TestCreateWithoutAuthorInput = {
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     answers?: questionAnswerCreateNestedManyWithoutTestInput
@@ -9058,8 +9160,11 @@ export namespace Prisma {
 
   export type TestUncheckedCreateWithoutAuthorInput = {
     id?: number
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     answers?: questionAnswerUncheckedCreateNestedManyWithoutTestInput
@@ -9186,9 +9291,12 @@ export namespace Prisma {
     OR?: TestScalarWhereInput[]
     NOT?: TestScalarWhereInput | TestScalarWhereInput[]
     id?: IntFilter<"Test"> | number
-    title?: StringFilter<"Test"> | string
-    area?: StringNullableFilter<"Test"> | string | null
+    title?: StringNullableFilter<"Test"> | string | null
+    area?: StringFilter<"Test"> | string
     authorId?: IntFilter<"Test"> | number
+    totalQuestions?: IntFilter<"Test"> | number
+    score?: IntFilter<"Test"> | number
+    status?: StringFilter<"Test"> | string
     createdAt?: DateTimeFilter<"Test"> | Date | string
     updatedAt?: DateTimeFilter<"Test"> | Date | string
   }
@@ -9586,8 +9694,11 @@ export namespace Prisma {
   }
 
   export type TestCreateWithoutAnswersInput = {
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutTestsInput
@@ -9595,9 +9706,12 @@ export namespace Prisma {
 
   export type TestUncheckedCreateWithoutAnswersInput = {
     id?: number
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
     authorId: number
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9653,8 +9767,11 @@ export namespace Prisma {
   }
 
   export type TestUpdateWithoutAnswersInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutTestsNestedInput
@@ -9662,9 +9779,12 @@ export namespace Prisma {
 
   export type TestUncheckedUpdateWithoutAnswersInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
     authorId?: IntFieldUpdateOperationsInput | number
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9689,8 +9809,11 @@ export namespace Prisma {
 
   export type TestCreateManyAuthorInput = {
     id?: number
-    title: string
-    area?: string | null
+    title?: string | null
+    area: string
+    totalQuestions: number
+    score?: number
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9761,8 +9884,11 @@ export namespace Prisma {
   }
 
   export type TestUpdateWithoutAuthorInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: questionAnswerUpdateManyWithoutTestNestedInput
@@ -9770,8 +9896,11 @@ export namespace Prisma {
 
   export type TestUncheckedUpdateWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     answers?: questionAnswerUncheckedUpdateManyWithoutTestNestedInput
@@ -9779,8 +9908,11 @@ export namespace Prisma {
 
   export type TestUncheckedUpdateManyWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    area?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: StringFieldUpdateOperationsInput | string
+    totalQuestions?: IntFieldUpdateOperationsInput | number
+    score?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

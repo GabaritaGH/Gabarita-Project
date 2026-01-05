@@ -154,6 +154,9 @@ exports.Prisma.TestScalarFieldEnum = {
   title: 'title',
   area: 'area',
   authorId: 'authorId',
+  totalQuestions: 'totalQuestions',
+  score: 'score',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

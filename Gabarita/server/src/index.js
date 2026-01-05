@@ -9,6 +9,7 @@ import commentRouter from './comments.js';
 import questionsRoutes from '../routes/questionRoutes.js';
 import authRouter, { protect } from './auth.js';
 import answersRouter from './answers.js'; // <--- [NOVO] Importe aqui
+import testsRouter from './tests.js';
 
 // 2. Inicialização
 const app = express();
@@ -27,22 +28,7 @@ app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
 app.use('/api/questions', questionsRoutes);
 app.use('/api/answers', answersRouter); // <--- [NOVO] Adicione a rota aqui
-
-// 5. Rotas Protegidas (Exemplo)
-app.get('/api/profile', protect, (req, res) => {
-  res.json({
-    message: 'Dados do perfil do usuário (Rota Protegida)',
-    user: req.user,
-  });
-});
-
-// 6. Rotas de Exemplo
-app.get('/api/status', (req, res) => {
-  res.json({
-    message: 'Servidor Gabarita+ está online e funcionando!',
-    database: 'Conectado via Prisma',
-  });
-});
+app.use('/api/tests', testsRouter);
 
 // 7. Inicialização do Servidor
 app.listen(PORT, () => {

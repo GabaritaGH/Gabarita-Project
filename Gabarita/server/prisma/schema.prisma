@@ -49,12 +49,16 @@ model Comment {
 
 model Test {
   id       Int     @id @default(autoincrement())
-  title    String
-  area     String?
+  title    String?
+  area     String
   authorId Int
   author   User    @relation(fields: [authorId], references: [id])
 
+  totalQuestions Int
   answers questionAnswer[]
+
+  score     Int      @default(0)           // Nota final (quantidade de acertos)
+  status    String   @default("IN_PROGRESS") // "IN_PROGRESS" ou "COMPLETED"
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
