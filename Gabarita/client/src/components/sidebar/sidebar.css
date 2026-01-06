@@ -24,6 +24,11 @@
     left: 0;
     transition: width 0.3s ease, transform 0.3s ease; /* Adiciona transição */
     z-index: 1000; 
+    justify-content: space-between;
+}
+
+.sidebar-top-content {
+    width: 100%;
 }
 
 .sidebar-container.closed {
@@ -138,3 +143,28 @@
     flex-grow: 1;
     transition: opacity 0.3s ease;
 }
+
+.sidebar-footer {
+    width: 100%;
+    margin-bottom: 20px; /* Espaço da borda inferior */
+    border-top: 1px solid var(--sidebar-border-color); /* Linha divisória opcional */
+    padding-top: 10px;
+}
+
+.logout-btn {
+    cursor: pointer;
+    color: #ff6b6b; /* Um tom avermelhado suave para indicar saída (opcional) */
+    /* Se preferir manter branco, remova a linha color acima */
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 107, 107, 0.1); /* Hover avermelhado suave */
+    /* Se preferir o hover roxo padrão, remova esse bloco */
+}
+
+.sidebar-container.closed .sidebar-footer {
+    display: flex;
+    justify-content: center;
+    border-top: none; /* Remove a borda quando fechado para ficar mais limpo */
+}
+

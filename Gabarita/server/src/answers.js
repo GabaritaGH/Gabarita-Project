@@ -14,6 +14,7 @@ const MAPA_ESTATISTICAS = {
   'espanhol':         { total: 'totalLinguagens', score: 'scoreLinguagens' }
 };
 
+// --- ROTA 1: Salvar Resposta (POST /api/answers) ---
 router.post('/', async (req, res) => {
   const { userId, questionId, questionYear, selectedOption, isCorrect, testId, discipline } = req.body;
 
@@ -25,14 +26,17 @@ router.post('/', async (req, res) => {
     const idDoAutor = parseInt(userId);
     const idDaQuestao = String(questionId);
 
-    // 1. Normaliza a disciplina para achar no mapa
+    // CORREÇÃO DA NORMALIZAÇÃO:
+    // 1. Lowercase -> 2. Remove Acentos -> 3. Troca espaço por hífen
     const discNormalizada = discipline 
-      ? discipline.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+      ? discipline.toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+          .replace(/\s+/g, '-') 
       : "";
     
-    const camposStats = MAPA_ESTATISTICAS[discNormalizada]; // Pega ex: { total: 'totalHumanas', score: 'scoreHumanas' }
+    const camposStats = MAPA_ESTATISTICAS[discNormalizada]; 
 
-    // 2. Verifica se já respondeu
+    // Verifica se já respondeu
     const respostaExistente = await prisma.questionAnswer.findUnique({
       where: {
         authorId_questionId: {
@@ -43,7 +47,6 @@ router.post('/', async (req, res) => {
     });
 
     if (respostaExistente) {
-      // Se já existe, só atualiza a resposta (sem mexer em estatísticas)
       const updated = await prisma.questionAnswer.update({
         where: { id: respostaExistente.id },
         data: {
@@ -55,39 +58,34 @@ router.post('/', async (req, res) => {
       return res.json(updated);
     }
 
-    // 3. Se é nova, usa TRANSACTION (Cria Resposta + Atualiza Stats)
+    // Transação para criar resposta e atualizar estatísticas
     const result = await prisma.$transaction(async (tx) => {
       
-      // A) Cria o registro da resposta (AGORA COM O CAMPO DISCIPLINE)
       const newAnswer = await tx.questionAnswer.create({
         data: {
           authorId: idDoAutor,
           questionId: idDaQuestao,
           questionYear: parseInt(questionYear) || null,
-          discipline: discipline || "Geral", // <--- Agora vai funcionar porque adicionamos no schema
+          discipline: discipline || "Geral", 
           selectedOption,
           isCorrect,
           testId: testId || null
         }
       });
 
-      // B) Monta o objeto de update das estatísticas
-      // Campos gerais (baseados no seu schema UserStatistics)
       const updateData = {
         questionsDone: { increment: 1 },
         questionsRight: isCorrect ? { increment: 1 } : { increment: 0 },
         questionsWrong: isCorrect ? { increment: 0 } : { increment: 1 },
       };
 
-      // Campos específicos da matéria (se identificada)
       if (camposStats) {
-        updateData[camposStats.total] = { increment: 1 }; // ex: totalHumanas + 1
+        updateData[camposStats.total] = { increment: 1 };
         if (isCorrect) {
-          updateData[camposStats.score] = { increment: 1 }; // ex: scoreHumanas + 1
+          updateData[camposStats.score] = { increment: 1 };
         }
       }
 
-      // C) Atualiza ou Cria a tabela de estatísticas
       await tx.userStatistics.upsert({
         where: { userId: idDoAutor },
         update: updateData,
@@ -96,7 +94,6 @@ router.post('/', async (req, res) => {
           questionsDone: 1,
           questionsRight: isCorrect ? 1 : 0,
           questionsWrong: isCorrect ? 0 : 1,
-          // Inicializa a matéria específica se for o primeiro create
           ...(camposStats ? {
              [camposStats.total]: 1,
              [camposStats.score]: isCorrect ? 1 : 0 
@@ -115,9 +112,40 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET user history (mantido igual)
+// --- ROTA 2: Pegar Estatísticas (GET /api/answers/statistics/:userId) ---
+// Coloque esta rota ANTES da rota `/:userId` para evitar conflito de URL
+router.get('/statistics/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const stats = await prisma.userStatistics.findUnique({
+            where: {
+                userId: parseInt(userId)
+            }
+        });
+
+        if (!stats) {
+            return res.json({
+                questionsDone: 0,
+                questionsRight: 0,
+                totalMatematica: 0,
+                totalHumanas: 0,
+                totalNatureza: 0,
+                totalLinguagens: 0
+            });
+        }
+
+        res.json(stats);
+    } catch (error) {
+        console.error("Erro ao buscar estatísticas:", error);
+        res.status(500).json({ error: "Erro interno" });
+    }
+});
+
+// --- ROTA 3: Histórico Geral (GET /api/answers/:userId) ---
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
+  // Verifica se userId é número para não confundir com outras rotas
   if (!userId || isNaN(parseInt(userId))) return res.json([]); 
 
   try {

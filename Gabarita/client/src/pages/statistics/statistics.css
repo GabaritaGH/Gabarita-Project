@@ -1,0 +1,326 @@
+/* client/src/pages/statistics/statistics.css */
+
+.stats-container {
+    padding: 2rem 4rem;
+    background-color: #E6E6F0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Header (Mantém igual) */
+.stats-header {
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6E549E; /* Roxo médio */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: 0.2s;
+}
+
+.back-link:hover {
+    color: #4B2C84;
+}
+
+.stats-header h1 {
+    font-size: 2rem;
+    color: #2D2D44;
+    font-weight: 700;
+}
+
+/* Layout dos Cards */
+.stats-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap; /* Para ficar responsivo */
+}
+
+.stats-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex: 1; /* Ocupam espaço igual */
+    min-width: 300px;
+}
+
+.stats-card h3 {
+    color: #4B2C84; /* Roxo escuro do título */
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Lista de Matérias (Card Esquerdo) */
+.subjects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.subject-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subject-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Ícones */
+.subject-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    /* Opcional: background leve atrás do ícone se quiser igual ao Figma */
+}
+
+.subject-name {
+    font-weight: 600;
+    color: #2D2D44;
+    font-size: 1rem;
+}
+
+.subject-count {
+    font-weight: 700;
+    color: #2D2D44;
+    font-size: 1rem;
+}
+
+/* Gráfico (Card Direito) */
+.chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 250px;
+}
+
+.chart-percentage-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    fill: #E6E6F0; /* Cor do texto "100%" - No Figma parece roxo escuro ou branco dependendo do fundo */
+    fill: #4B2C84; /* Roxo escuro */
+}/* client/src/pages/statistics/statistics.css */
+
+.stats-container {
+    padding: 2rem 4rem;
+    background-color: #E6E6F0; /* Fundo lilás acinzentado claro do Figma */
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Header */
+.stats-header {
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6E549E; /* Roxo médio */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: 0.2s;
+}
+
+.back-link:hover {
+    color: #4B2C84;
+}
+
+.stats-header h1 {
+    font-size: 2rem;
+    color: #2D2D44;
+    font-weight: 700;
+}
+
+/* Layout dos Cards */
+.stats-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap; /* Para ficar responsivo */
+}
+
+.stats-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex: 1; /* Ocupam espaço igual */
+    min-width: 300px;
+}
+
+.stats-card h3 {
+    color: #4B2C84; /* Roxo escuro do título */
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Lista de Matérias (Card Esquerdo) */
+.subjects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.subject-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subject-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Ícones */
+.subject-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    /* Opcional: background leve atrás do ícone se quiser igual ao Figma */
+}
+
+.subject-name {
+    font-weight: 600;
+    color: #2D2D44;
+    font-size: 1rem;
+}
+
+.subject-count {
+    font-weight: 700;
+    color: #2D2D44;
+    font-size: 1rem;
+}
+
+/* Gráfico (Card Direito) */
+.chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 250px;
+}
+
+.chart-percentage-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    fill: #E6E6F0; /* Cor do texto "100%" - No Figma parece roxo escuro ou branco dependendo do fundo */
+    fill: #4B2C84; /* Roxo escuro */
+}
+
+.stats-grid {
+    display: grid;
+    /* Duas colunas iguais */
+    grid-template-columns: 1fr 1fr; 
+    gap: 2rem;
+    width: 100%;
+}
+
+.stats-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Classe utilitária para o card novo ocupar a largura total */
+.full-width-card {
+    grid-column: 1 / -1; /* Ocupa de 1 até o final (todas as colunas) */
+}
+
+/* Responsividade: Celular fica tudo em 1 coluna */
+@media (max-width: 768px) {
+    .stats-container {
+        padding: 1.5rem;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos internos dos cards (Mantidos e Ajustados) */
+.stats-card h3 {
+    color: #4B2C84;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Listas e Gráficos */
+.subjects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.subject-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subject-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.subject-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.subject-name, .subject-count {
+    font-weight: 600;
+    color: #2D2D44;
+    font-size: 1rem;
+}
+
+/* Donut Chart */
+.chart-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+    position: relative;
+}
+
+.chart-percentage-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    fill: #4B2C84;
+}
+
+/* Bar Chart Wrapper */
+.bar-chart-wrapper {
+    width: 100%;
+    margin-top: 1rem;
+}

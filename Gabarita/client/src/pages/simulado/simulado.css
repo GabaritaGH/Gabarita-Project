@@ -1,10 +1,11 @@
 /* === VARIÁVEIS GERAIS (Baseado no seu código) === */
 :root {
-  --bg-color: #dcdceb;           /* Fundo cinza/azulado */
+  --bg-color: #dcdceb;
   --placeholder-bg: #a0a0b2;
-  --text-primary: #1a1a2e;
-  --purple-btn: #7A4D9E;         /* Roxo Principal */
-  --purple-btn-hover: #5c1aae;   /* Roxo Escuro */
+  --text-primary: #0f0f1a; /* Texto bem mais escuro (quase preto) */
+  --text-secondary: #333333; /* Texto secundário escurecido */
+  --purple-btn: #7A4D9E;
+  --purple-btn-hover: #5c1aae;
   --card-bg: #ffffff;
   --border-color: #ccc;
   --scroll-track: #f0f0f5;
@@ -114,9 +115,9 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  color: #666;
-  font-weight: 700;
-  font-size: 0.9rem;
+  color: var(--text-secondary); /* Antes era #666 */
+  font-weight: 800; /* Mais negrito */
+  font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -137,19 +138,20 @@
 .q-enunciado::-webkit-scrollbar-thumb:hover { background: #a0a0b0; }
 
 .q-title-text {
-  font-size: 1.2rem;
-  color: var(--text-primary);
+  font-size: 1.3rem;
+  color: #000; /* Preto total */
   margin-bottom: 1rem;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /* Formatação do texto do enunciado */
 .q-context p, .q-paragraph {
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.6;
-  color: var(--text-primary) !important; /* Força a cor escura */
+  color: #1a1a1a !important; /* Força contraste alto */
   margin-bottom: 1rem;
   text-align: justify;
+  font-weight: 400;
 }
 
 .q-images {
@@ -165,8 +167,8 @@
 
 .q-command {
   margin-top: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: #000; /* Preto total */
 }
 
 /* === ALTERNATIVAS (Botões) === */
@@ -396,18 +398,56 @@
 .result-card {
   text-align: center;
   background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 50px 40px; /* Aumentei o padding vertical */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  animation: fadeIn 0.5s ease-out;
 }
 
-.score-circle {
-  font-size: 4rem;
+.result-card h2 {
+  font-size: 2rem;
+  color: #1a1a1a; /* Preto quase total para contraste máximo */
   font-weight: 800;
-  color: var(--purple-btn);
-  margin: 20px 0;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
 }
-.score-total { font-size: 2rem; color: #aaa; }
+
+.result-description {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.result-percent {
+    font-size: 1.3rem;
+    color: #333; /* Escurecido */
+    font-weight: 600;
+    background-color: #f4f4f8;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-bottom: 40px;
+}
+.score-circle {
+  margin: 30px 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+}
+
+.score-total { 
+  font-size: 2.5rem; 
+  color: #888; /* O total fica mais cinza para dar destaque ao acerto */
+  font-weight: 600;
+}
+
+.score-number {
+  font-size: 6rem; /* Aumentei bastante o número de acertos */
+  font-weight: 900;
+  line-height: 1;
+  color: var(--purple-btn); /* Roxo da marca */
+  text-shadow: 2px 2px 0px rgba(122, 77, 158, 0.2);
+}
 
 .btn-restart {
   margin-top: 30px;
@@ -430,12 +470,24 @@
 }
 
 .legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* Espaço entre a bolinha e o texto */
-  font-size: 0.85rem;
-  color: #666;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #444;
 }
+
+.legend-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-circle.correct { background-color: #28a745; }
+.legend-circle.wrong { background-color: #dc3545; }
+.legend-circle.skipped { background-color: #95a5a6; }
 
 /* Isso força a bolinha da legenda a ter um tamanho fixo pequeno */
 .dot.sm {
@@ -461,4 +513,138 @@
   flex-direction: column; /* Coloca imagem em cima, texto embaixo */
   align-items: flex-start;
   width: 100%;
+}
+
+.review-banner {
+    background-color: #ffeaa7;
+    color: #d35400;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #fdcb6e;
+}
+
+/* Botões das Alternativas na Revisão */
+.alt-btn.correct-answer {
+    background-color: #d4edda !important; /* Verde claro fundo */
+    border-color: #28a745 !important;      /* Verde borda */
+    color: #155724;
+}
+.alt-btn.correct-answer .alt-letter-box {
+    background-color: #28a745;
+    color: white;
+}
+
+.alt-btn.wrong-answer {
+    background-color: #f8d7da !important; /* Vermelho claro fundo */
+    border-color: #dc3545 !important;      /* Vermelho borda */
+    color: #721c24;
+}
+.alt-btn.wrong-answer .alt-letter-box {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Botão outline para voltar */
+.btn-outline {
+    background: transparent;
+    border: 1px solid #6c5ce7;
+    color: #6c5ce7;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.btn-outline:hover {
+    background: #f0f0ff;
+}
+
+/* --- GRID DE RESULTADO --- */
+.review-section {
+    margin-top: 40px;
+    border-top: 2px solid #f0f0f5; /* Linha divisória */
+    padding-top: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+.review-section h3 {
+    font-size: 1.4rem;
+    color: #222; /* Preto forte */
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.review-hint {
+    font-size: 0.95rem;
+    color: #666; /* Cinza médio, mas legível */
+    margin-bottom: 25px;
+}
+
+.result-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.result-dot {
+    width: 50px; /* Levemente maiores */
+    height: 50px;
+    border-radius: 12px; /* Quadrado arredondado (moderno) em vez de círculo total */
+    border: none;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito "bouncy" */
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1); /* Sombra sólida embaixo */
+}
+
+.result-dot:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+.result-dot:hover {
+    transform: translateY(-2px);
+}
+
+.result-dot.correct { background-color: #00C851; box-shadow: 0 4px 0 #007E33; }
+.result-dot.wrong { background-color: #ff4444; box-shadow: 0 4px 0 #CC0000; }
+.result-dot.skipped { background-color: #a0a0b2; box-shadow: 0 4px 0 #707080; }
+
+/* Legenda do Resultado */
+.result-legend {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-flex;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.legend-item span {
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Miniaturas na Sidebar (Revisão) */
+.dot.correct-mini {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+.dot.wrong-mini {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
 }

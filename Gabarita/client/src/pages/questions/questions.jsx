@@ -74,7 +74,8 @@ const Questions = () => {
             // Transformar em mapa por questionId
             const historyMap = {};
             data.forEach(item => {
-                historyMap[item.questionId] = item;
+                const uniqueKey = `${item.questionYear}-${item.questionId}`; 
+                historyMap[uniqueKey] = item;
             });
 
             setUserHistory(historyMap);
@@ -223,7 +224,8 @@ const Questions = () => {
         qId = `${qId}-${language}`;
     }
 
-    const historyItem = userHistory[qId];
+    const uniqueKey = `${filters.year}-${qId}`;
+    const historyItem = userHistory[uniqueKey];
 
     if (historyItem) {
         setSelectedOption(historyItem.selectedOption);
@@ -323,10 +325,10 @@ const Questions = () => {
         if (!response.ok) {
             console.error("Erro ao salvar resposta no banco");
         } else {
-            // ✅ ATUALIZA O HISTÓRICO LOCAL
+            const uniqueKey = `${filters.year}-${finalQuestionId}`;
             setUserHistory(prev => ({
                 ...prev,
-                [finalQuestionId]: {
+                [uniqueKey]: {
                     selectedOption,
                     isCorrect
                 }
